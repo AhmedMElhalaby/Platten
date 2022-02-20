@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'customer',
         'passwords' => 'users',
     ],
 
@@ -36,9 +36,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'customer' => [
+            'driver' => 'passport',
+            'provider' => 'customers',
+        ],
+        'vendor' => [
+            'driver' => 'passport',
+            'provider' => 'vendors',
+        ],
+        'employee' => [
+            'driver' => 'passport',
+            'provider' => 'employees',
         ],
     ],
 
@@ -60,15 +68,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => \App\Models\Vendor::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Vendor::class,
+        ],
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Vendor::class,
+        ],
     ],
 
     /*
