@@ -25,7 +25,7 @@ class ApiRequest extends FormRequest
     {
         throw new HttpResponseException($this->fail_response($validator->errors()->all(),422));
     }
-    protected function success_response(array $message,$data =[],$data_name = 'data',$paging = null,$code = 200): JsonResponse
+    public function success_response(array $message,$data =[],$data_name = 'data',$paging = null,$code = 200): JsonResponse
     {
         return response()->json(
             [
@@ -48,7 +48,7 @@ class ApiRequest extends FormRequest
             200
         );
     }
-    protected function fail_response(array $message, $code = 200): JsonResponse
+    public function fail_response(array $message, $code = 200): JsonResponse
     {
         return response()->json(
             [
@@ -64,7 +64,7 @@ class ApiRequest extends FormRequest
             200
         );
     }
-    protected function errorJsonResponse(array $message, $code = 500): JsonResponse
+    public function error_response(array $message, $code = 500): JsonResponse
     {
 
         return response()->json(
@@ -80,5 +80,16 @@ class ApiRequest extends FormRequest
             ],
             200
         );
+    }
+    public function pagination_response($paging): array
+    {
+        return [
+            'total'=>$paging->total(),
+            'per_page' => $paging->perPage(),
+            'current_page' => $paging->currentPage(),
+            'last_page' => $paging->lastPage(),
+            'from' => $paging->firstItem(),
+            'to' => $paging->lastItem()
+        ];
     }
 }
