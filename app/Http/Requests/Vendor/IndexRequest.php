@@ -30,6 +30,6 @@ class IndexRequest extends ApiRequest
             $Vendors = $Vendors->where('name','Like','%'.$this->q.'%');
         }
         $Vendors = $Vendors->paginate($this->per_page??10);
-        return $this->success_response([],VendorResource::collection($Vendors->items()),'Vendors',$Vendors);
+        return $this->success_response([],['Vendors'=>VendorResource::collection($Vendors->items())],['Vendors'=>$Vendors]);
     }
 }

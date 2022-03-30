@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,5 +40,48 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ( $exception instanceof AuthorizationException) {
+            if ($request->isJson() || $request->ajax() || $request->wantsJson())
+                return response()->json(
+                    [
+                        'status' => [
+                            'status'=>'fail',
+                            'message' => [__( 'auth.unauthorized')],
+                            'code' => 403,
+                        ],
+                    ],
+                );
+        }
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json(
+                [
+                    'status' => [
+                        'status'=>'error',
+                        'message' => 'Not Found',
+                        'code' => 404,
+                    ],
+                ]
+            );
+        }
+        return parent::render($request, $exception);
+    }
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(
+                [
+                    'status' => [
+                        'status'=>'fail',
+                        'message' => [__( 'auth.unauthenticated')],
+                        'code' => 401,
+                    ],
+                ],
+            );
+        }
+        return redirect()->guest('login');
     }
 }

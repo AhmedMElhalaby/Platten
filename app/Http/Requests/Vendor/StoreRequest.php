@@ -31,6 +31,6 @@ class StoreRequest extends ApiRequest
         $Vendor->name = $this->name;
         $Vendor->save();
         $Vendor->refresh();
-        return $this->success_response([__('messages.created_successful')],new VendorResource($Vendor),'Vendor');
+        return $this->success_response([__('messages.created_successful')],['Vendor'=>new VendorResource($Vendor)]);
     }
 }

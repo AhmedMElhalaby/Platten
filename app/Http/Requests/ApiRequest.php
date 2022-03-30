@@ -25,28 +25,23 @@ class ApiRequest extends FormRequest
     {
         throw new HttpResponseException($this->fail_response($validator->errors()->all(),422));
     }
-    public function success_response(array $message,$data =[],$data_name = 'data',$paging = null,$code = 200): JsonResponse
+    public function success_response(array $message,array $data =[],$paging = null,$code = 200): JsonResponse
     {
-        return response()->json(
-            [
-                'status' => [
-                    'status'=>'success',
-                    'message' => $message,
-                    'code' => $code,
+        $response = [
+            'status' => [
+                'status'=>'success',
+                'message' => $message,
+                'code' => $code,
 
-                ],
-                ''.$data_name => $data,
-                'paging'=>$paging?[
-                    'total'=>$paging->total(),
-                    'per_page' => $paging->perPage(),
-                    'current_page' => $paging->currentPage(),
-                    'last_page' => $paging->lastPage(),
-                    'from' => $paging->firstItem(),
-                    'to' => $paging->lastItem()
-                ]:null
             ],
-            200
-        );
+            'data' => $data,
+        ];
+        if ($paging != null){
+            foreach ($paging as $key=>$value){
+                $response['paging'][$key] = self::pagination_response($value);
+            }
+        }
+        return response()->json($response);
     }
     public function fail_response(array $message, $code = 200): JsonResponse
     {
@@ -57,16 +52,11 @@ class ApiRequest extends FormRequest
                     'message' => $message,
                     'code' => $code,
                 ],
-                'data' => [],
-                'paging'=>null
-
             ],
-            200
         );
     }
     public function error_response(array $message, $code = 500): JsonResponse
     {
-
         return response()->json(
             [
                 'status' => [
@@ -74,9 +64,6 @@ class ApiRequest extends FormRequest
                     'message' => $message,
                     'code' => $code,
                 ],
-                'data' => [],
-                'paging'=>null
-
             ],
             200
         );

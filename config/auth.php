@@ -70,7 +70,7 @@ return [
     'providers' => [
         'customers' => [
             'driver' => 'eloquent',
-            'model' => \App\Models\Vendor::class,
+            'model' => \App\Models\Customer::class,
         ],
         'vendors' => [
             'driver' => 'eloquent',
@@ -78,7 +78,7 @@ return [
         ],
         'employees' => [
             'driver' => 'eloquent',
-            'model' => \App\Models\Vendor::class,
+            'model' => \App\Models\Employee::class,
         ],
     ],
 

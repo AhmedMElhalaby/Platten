@@ -23,6 +23,6 @@ class ShowRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        return $this->success_response([],new VendorResource(Vendor::find($this->vendor_id)),'Vendor');
+        return $this->success_response([],['Vendor'=>new VendorResource(Vendor::find($this->vendor_id))]);
     }
 }

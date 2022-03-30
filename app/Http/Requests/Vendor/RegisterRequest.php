@@ -14,7 +14,7 @@ class RegisterRequest extends ApiRequest
     {
         return [
             'name'=>'required|string|max:255',
-            'email'=>'required|string|email|max:255',
+            'email'=>'required|string|email|unique:vendors,email|max:255',
             'password'=>'required|string|confirmed|max:255',
         ];
     }
@@ -35,10 +35,9 @@ class RegisterRequest extends ApiRequest
         $Vendor->password = Hash::make($this->password);
         $Vendor->save();
         $Vendor->refresh();
-        $tokenResult = $Vendor->createToken('Personal Access Token');
+        $tokenResult = $Vendor->createToken('Vendor Token');
         $token = $tokenResult->token;
         $token->save();
-        $Vendor->refresh();
         return $this->success_response([],[
             'Vendor'=>new VendorResource($Vendor),
             'Login'=>[

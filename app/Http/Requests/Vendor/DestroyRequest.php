@@ -27,7 +27,11 @@ class DestroyRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $Vendor = (new Vendor())->find($this->vendor_id);
-        $Vendor->delete();
-        return $this->success_response([__('messages.deleted_successfully')]);
+        try{
+            $Vendor->delete();
+            return $this->success_response([__('messages.deleted_successfully')]);
+        }catch(\Exception $e){
+            return $this->error_response([$e->getMessage()]);
+        }
     }
 }
