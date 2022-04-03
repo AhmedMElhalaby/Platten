@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
-    protected $fillable = ['vendor_id','category_id','sub_category_id','brand_id','product_type_id','product_type_model_id','product_type_model_color_id','product_type_model_size_id','cost_price','profit_rate','sell_price','discount','status'];
+    protected $fillable = ['vendor_id','category_id','sub_category_id','brand_id','product_type_id','product_type_model_id','product_type_model_color_id','product_type_model_size_id','cost_price','profit_rate','sell_price','discount','status','product_type'];
     public function vendor(): BelongsTo
     {
         return $this->belongsTo(Vendor::class);
@@ -44,4 +44,8 @@ class Product extends Model
     {
         return $this->belongsTo(ProductTypeModelSize::class);
     }
+    const ProductTypes = [
+        'New'=>1,
+        'Used'=>2
+    ];
 }

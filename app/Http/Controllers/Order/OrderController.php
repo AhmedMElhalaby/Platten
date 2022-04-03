@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Finance;
+namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Finance\Transaction\IndexRequest;
-use App\Http\Requests\Finance\Transaction\ShowRequest;
-use App\Http\Requests\Finance\Transaction\StoreRequest;
-use App\Http\Requests\Finance\Transaction\UpdateRequest;
+use App\Http\Requests\Order\IndexRequest;
+use App\Http\Requests\Order\ShowRequest;
+use App\Http\Requests\Order\StoreRequest;
+use App\Http\Requests\Order\UpdateRequest;
 
-class TransactionController extends Controller
+class OrderController extends Controller
 {
     public function index(IndexRequest $request)
     {

@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->double('profit_rate');
             $table->double('sell_price');
             $table->double('discount')->default(0);
+            $table->tinyInteger('product_type');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

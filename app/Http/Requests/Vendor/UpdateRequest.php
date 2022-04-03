@@ -29,6 +29,8 @@ class UpdateRequest extends ApiRequest
             'address_alt'=>'nullable|string|max:255',
             'maroof_tax_number'=>'nullable|string|max:255',
             'maroof_company_number'=>'nullable|string|max:255',
+            'avatar'=>'nullable|mimes:jpg,png,jpeg',
+            'cover'=>'nullable|mimes:jpg,png,jpeg',
         ];
     }
     public function attributes(): array
@@ -39,6 +41,7 @@ class UpdateRequest extends ApiRequest
             'city_id'=>__('models.Vendor.city_id'),
             'name'=>__('models.Vendor.name'),
             'mobile'=>__('models.Vendor.mobile'),
+            'email'=>__('models.Vendor.email'),
             'nickname'=>__('models.Vendor.nickname'),
             'company_name'=>__('models.Vendor.company_name'),
             'postcode'=>__('models.Vendor.postcode'),
@@ -86,6 +89,12 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->filled('maroof_company_number')) {
             $Vendor->maroof_company_number = $this->maroof_company_number;
+        }
+        if ($this->hasFile('avatar')) {
+            $Vendor->avatar = $this->avatar;
+        }
+        if ($this->hasFile('cover')) {
+            $Vendor->cover = $this->cover;
         }
         $Vendor->save();
         $Vendor->refresh();

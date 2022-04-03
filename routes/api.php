@@ -232,3 +232,35 @@ Route::group([
         });
     });
 });
+
+Route::group([
+    'prefix' => 'finance',
+    'namespace' => 'Finance'
+], function () {
+    Route::group([
+        'prefix' => 'transactions',
+    ], function() {
+        Route::get('/','TransactionController@index');
+        Route::get('show','TransactionController@show');
+        Route::post('store','TransactionController@store');
+        Route::post('update','TransactionController@update');
+    });
+    Route::group([
+        'prefix' => 'withdrawal_requests',
+    ], function() {
+        Route::get('/','WithdrawalRequestController@index');
+        Route::get('show','WithdrawalRequestController@show');
+        Route::post('store','WithdrawalRequestController@store');
+        Route::post('update','WithdrawalRequestController@update');
+    });
+});
+
+Route::group([
+    'prefix' => 'orders',
+    'namespace' => 'Order'
+], function () {
+    Route::get('/','OrderController@index');
+    Route::get('show','OrderController@show');
+    Route::post('store','OrderController@store');
+    Route::post('update','OrderController@update');
+});

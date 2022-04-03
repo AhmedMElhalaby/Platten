@@ -18,6 +18,8 @@ class CreateVendorsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->foreignId('country_id')->nullable()->constrained();
+            $table->foreignId('city_id')->nullable()->constrained();
             $table->string('mobile')->nullable();
             $table->string('nickname')->nullable();
             $table->string('company_name')->nullable();
@@ -26,8 +28,8 @@ class CreateVendorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('address_alt')->nullable();
             $table->string('postcode')->nullable();
-            $table->foreignId('country_id')->nullable()->constrained();
-            $table->foreignId('city_id')->nullable()->constrained();
+            $table->string('avatar')->nullable();
+            $table->string('cover')->nullable();
             $table->timestamps();
         });
     }

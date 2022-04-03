@@ -12,7 +12,7 @@ class Vendor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'vendors';
-    protected $fillable = ['name','email','password','mobile','nickname','company_name','maroof_company_number','maroof_tax_number','address','address_alt','postcode','country_id','city_id'];
+    protected $fillable = ['name','email','password','mobile','nickname','company_name','maroof_company_number','maroof_tax_number','address','address_alt','postcode','country_id','city_id','avatar','cover'];
     protected $hidden = ['password'];
     public function country(): BelongsTo
     {
