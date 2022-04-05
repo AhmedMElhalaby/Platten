@@ -21,8 +21,8 @@ class CreateProductsTable extends Migration
             $table->foreignId('brand_id');
             $table->foreignId('product_type_id');
             $table->foreignId('product_type_model_id');
-            $table->foreignId('product_type_model_color_id');
-            $table->foreignId('product_type_model_size_id');
+            $table->foreignId('product_type_model_color_id')->nullable();
+            $table->foreignId('product_type_model_size_id')->nullable();
             $table->double('cost_price');
             $table->double('profit_rate');
             $table->double('sell_price');

@@ -14,7 +14,10 @@ class SubscriptionServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>$this->faker->sentence(),
+            'subscription_id'=>rand(1,2),
+            'color'=>$this->faker->hexColor(),
+            'checked'=>$this->faker->boolean(),
         ];
     }
 }

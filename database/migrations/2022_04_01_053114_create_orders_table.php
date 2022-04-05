@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('vendor_id')->nullable()->constrained();
             $table->foreignId('discount_id')->nullable();
             $table->double('discount_amount')->default(0);
+            $table->double('cost')->default(0);
             $table->double('amount')->default(0);
             $table->double('total_amount')->default(0);
             $table->string('recipient_name');
@@ -29,6 +30,8 @@ class CreateOrdersTable extends Migration
             $table->string('map_address')->nullable();
             $table->tinyInteger('status')->default(\App\Models\Order::Statuses['Pending']);
             $table->string('note')->nullable();
+            $table->string('reject_reason')->nullable();
+            $table->string('cancel_reason')->nullable();
             $table->timestamps();
         });
     }

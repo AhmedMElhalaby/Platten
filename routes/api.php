@@ -18,12 +18,18 @@ Route::group([
         Route::get('/','ProductController@index');
         Route::get('show','ProductController@show');
         Route::group([
-            'middleware' => 'auth:employee'
+            'middleware' => 'auth:vendor'
         ], function() {
             Route::post('store','ProductController@store');
             Route::post('update','ProductController@update');
             Route::post('destroy','ProductController@destroy');
         });
+    });
+    Route::group([
+        'prefix' => 'statistics',
+        'middleware' => 'auth:vendor'
+    ], function () {
+        Route::get('home','StatisticController@home');
     });
 });
 
