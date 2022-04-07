@@ -4,6 +4,7 @@ namespace App\Http\Requests\General\Product\ProductType;
 
 use App\Http\Requests\ApiRequest;
 use App\Http\Resources\General\Product\ProductTypeResource;
+use App\Models\ProductMedia;
 use App\Models\ProductType;
 use Illuminate\Http\JsonResponse;
 
@@ -20,6 +21,8 @@ class StoreRequest extends ApiRequest
             'sub_category_id'=>'required|exists:sub_categories,id',
             'brand_id'=>'required|exists:brands,id',
             'name'=>'required|string|max:255',
+            'media'=>'required',
+            'media.*'=>'required|mimes:png,jpg,jpeg'
         ];
     }
     public function attributes(): array
@@ -29,6 +32,7 @@ class StoreRequest extends ApiRequest
             'sub_category_id'=>__('models.ProductType.sub_category_id'),
             'brand_id'=>__('models.ProductType.brand_id'),
             'name'=>__('models.ProductType.name'),
+            'media'=>__('models.ProductType.media'),
         ];
     }
     public function run(): JsonResponse
@@ -40,6 +44,16 @@ class StoreRequest extends ApiRequest
         $ProductType->name = $this->name;
         $ProductType->save();
         $ProductType->refresh();
+        foreach ($this->file('media') as $media){
+            $mime_type = $media->getClientOriginalExtension();
+            $name = $media->getClientOriginalName();
+            $path = $media->store('public/files');
+            $ProductMedia = new ProductMedia();
+            $ProductMedia->path = $path;
+            $ProductMedia->product_type_id = $ProductType->id;
+            $ProductMedia->mime_type = ProductMedia::MimeTypes[$mime_type];
+            $ProductMedia->save();
+        }
         return $this->success_response([__('messages.created_successful')],[
             'ProductType'=>new ProductTypeResource($ProductType)
         ]);

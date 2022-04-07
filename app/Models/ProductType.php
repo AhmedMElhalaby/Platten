@@ -28,4 +28,8 @@ class ProductType extends Model
     {
         return $this->hasMany(ProductTypeModel::class);
     }
+    public function media(): HasMany
+    {
+        return $this->hasMany(ProductMedia::class,'product_type_id');
+    }
 }
