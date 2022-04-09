@@ -18,7 +18,7 @@ class CreateWithdrawalRequestsTable extends Migration
             $table->tinyInteger('account_type');
             $table->foreignId('account_id');
             $table->double('amount');
-            $table->foreignId('bank_id')->constrained();
+            $table->foreignId('bank_id');
             $table->string('iban');
             $table->string('reject_reason')->nullable();
             $table->tinyInteger('status')->default(\App\Models\WithdrawalRequest::Statuses['Pending']);
