@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Customer;
 
 use App\Http\Requests\ApiRequest;
-use App\Http\Resources\CustomerResource;
+use App\Http\Resources\Customer\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +13,7 @@ class LoginRequest extends ApiRequest
     public function rules():array
     {
         return [
-            'email'=>'required|string|email|exists:employees,email|max:255',
+            'email'=>'required|string|email|exists:customers,email|max:255',
             'password'=>'required|string|max:255',
         ];
     }
@@ -29,11 +29,15 @@ class LoginRequest extends ApiRequest
         $Customer = (new Customer())->where('email',$this->email)->first();
         if (!Hash::check($this->password,$Customer->password))
             return $this->fail_response([__('auth.failed')]);
+        $tokenResult = $Customer->createToken('Customer Token');
+        $token = $tokenResult->token;
+        $token->save();
+        $Customer->refresh();
         return $this->success_response([],[
             'Customer'=>new CustomerResource($Customer),
             'Login'=>[
                 'token_type'=>'Bearer',
-                'access_token'=>$Customer->createToken('Customer Token')->plainTextToken
+                'access_token'=>$tokenResult->accessToken
             ]
         ]);
     }

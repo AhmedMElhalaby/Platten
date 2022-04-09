@@ -41,7 +41,7 @@ class ProductFactory extends Factory
             'profit_rate' => $profit,
             'discount' => $discount,
             'sell_price' => $sell_price,
-            'product_type' => rand(1,2)
+            'type' => rand(1,2)
         ];
     }
 }

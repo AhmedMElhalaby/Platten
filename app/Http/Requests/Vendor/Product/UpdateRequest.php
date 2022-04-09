@@ -28,7 +28,7 @@ class UpdateRequest extends ApiRequest
             'profit_rate'=>'nullable|numeric',
             'discount'=>'nullable|numeric',
             'status'=>'nullable|boolean',
-            'product_type'=>'nullable|in:'.implode(',',array_values(Product::ProductTypes)),
+            'type'=>'nullable|in:'.implode(',',array_values(Product::Types)),
         ];
     }
     public function attributes(): array
@@ -46,7 +46,7 @@ class UpdateRequest extends ApiRequest
             'profit_rate'=>__('models.Product.profit_rate'),
             'discount'=>__('models.Product.discount'),
             'status'=>__('models.Product.status'),
-            'product_type'=>__('models.Product.product_type'),
+            'type'=>__('models.Product.type'),
         ];
     }
     public function run(): JsonResponse
@@ -85,8 +85,8 @@ class UpdateRequest extends ApiRequest
         if ($this->filled('status')) {
             $Product->status = $this->status;
         }
-        if ($this->filled('product_type')) {
-            $Product->product_type = $this->product_type;
+        if ($this->filled('type')) {
+            $Product->type = $this->type;
         }
         $Product->save();
         $Product->refresh();

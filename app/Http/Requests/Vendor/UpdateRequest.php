@@ -6,20 +6,20 @@ use App\Http\Requests\ApiRequest;
 use App\Http\Resources\VendorResource;
 use App\Models\Vendor;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateRequest extends ApiRequest
 {
     public function authorize():bool
     {
-        return auth('employee')->check();
+        return auth('vendor')->check();
     }
     public function rules():array
     {
         return [
-            'vendor_id'=>'required|exists:vendors,id',
             'country_id'=>'nullable|exists:vendors,id',
             'city_id'=>'nullable|exists:vendors,id',
-            'email'=>'nullable|email|unique:vendors,email,'.request('vendor_id').'|max:255',
+            'email'=>'nullable|email|unique:vendors,email,'.auth('vendor')->user()->id.'|max:255',
             'name'=>'nullable|string|max:255',
             'mobile'=>'nullable|string|max:255',
             'nickname'=>'nullable|string|max:255',
@@ -36,7 +36,6 @@ class UpdateRequest extends ApiRequest
     public function attributes(): array
     {
         return [
-            'vendor_id'=>__('models.Vendor.vendor_id'),
             'country_id'=>__('models.Vendor.country_id'),
             'city_id'=>__('models.Vendor.city_id'),
             'name'=>__('models.Vendor.name'),
@@ -53,7 +52,7 @@ class UpdateRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Vendor = (new Vendor())->find($this->vendor_id);
+        $Vendor = (new Vendor())->find(auth('vendor')->user()->id);
         if ($this->filled('name')) {
             $Vendor->name = $this->name;
         }
@@ -91,10 +90,24 @@ class UpdateRequest extends ApiRequest
             $Vendor->maroof_company_number = $this->maroof_company_number;
         }
         if ($this->hasFile('avatar')) {
-            $Vendor->avatar = $this->avatar;
+            $avatar = $this->file('avatar');
+            $filename = md5(time().$avatar->getClientOriginalName()).'.'.$avatar->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs(
+                'public/files/',
+                $avatar,
+                $filename
+            );
+            $Vendor->avatar = 'public/storage/files/'.$filename;
         }
         if ($this->hasFile('cover')) {
-            $Vendor->cover = $this->cover;
+            $cover = $this->file('cover');
+            $filename = md5(time().$cover->getClientOriginalName()).'.'.$cover->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs(
+                'public/files/',
+                $cover,
+                $filename
+            );
+            $Vendor->cover = 'public/storage/files/'.$filename;
         }
         $Vendor->save();
         $Vendor->refresh();

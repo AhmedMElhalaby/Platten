@@ -10,6 +10,8 @@ Route::group([
     Route::group([
         'middleware' => 'auth:vendor'
     ], function() {
+        Route::get('me','VendorController@me');
+        Route::post('update','VendorController@update');
         Route::post('logout','VendorController@logout');
     });
     Route::group([
@@ -30,6 +32,59 @@ Route::group([
         'middleware' => 'auth:vendor'
     ], function () {
         Route::get('home','StatisticController@home');
+    });
+    Route::group([
+        'prefix' => 'subscriptions',
+        'middleware' => 'auth:vendor'
+    ], function () {
+        Route::get('my_subscription','VendorSubscriptionController@my_subscription');
+        Route::post('subscribe','VendorSubscriptionController@subscribe');
+        Route::post('pay_subscribe','VendorSubscriptionController@pay_subscribe');
+    });
+});
+
+Route::group([
+    'prefix' => 'customers',
+    'namespace' => 'Customer'
+], function () {
+    Route::post('login','CustomerController@login');
+    Route::post('register','CustomerController@register');
+    Route::group([
+        'middleware' => 'auth:customer'
+    ], function() {
+        Route::post('logout','CustomerController@logout');
+
+    });
+    Route::group([
+        'prefix' => 'addresses',
+    ], function () {
+        Route::get('show','AddressController@show');
+        Route::group([
+            'middleware' => 'auth:customer'
+        ], function() {
+            Route::get('mine','AddressController@mine');
+            Route::post('store','AddressController@store');
+            Route::post('update','AddressController@update');
+            Route::post('destroy','AddressController@destroy');
+        });
+        Route::group([
+            'middleware' => 'auth:employee'
+        ], function() {
+            Route::get('/','AddressController@index');
+        });
+    });
+    Route::group([
+        'prefix' => 'carts',
+    ], function () {
+        Route::group([
+            'middleware' => 'auth:customer'
+        ], function() {
+            Route::get('/','CartController@index');
+            Route::get('show','CartController@show');
+            Route::post('store','CartController@store');
+            Route::post('update','CartController@update');
+            Route::post('destroy','CartController@destroy');
+        });
     });
 });
 

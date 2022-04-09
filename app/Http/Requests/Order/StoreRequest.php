@@ -41,6 +41,7 @@ class StoreRequest extends ApiRequest
         $vendor_id = null;
         $cost = 0;
         $total_amount = 0;
+        $total_profit = 0;
         $discount_amount = 0;
         $Address = Address::find($this->address_id);
         $Order = new Order();
@@ -66,16 +67,19 @@ class StoreRequest extends ApiRequest
             $vendor_id = $Product->vendor_id;
             $total_amount += $Product->sell_price * $cart->quantity;
             $cost += $Product->cost_price * $cart->quantity;
+            $total_profit = ($Product->sell_price -  $Product->cost_price)*$cart->quantity;
         }
         if ($this->filled('discount_id')){
             $Discount = Discount::find($this->discount_id);
             $discount_amount = $total_amount * ($Discount->rate/100);
+            $total_profit = $total_profit -($total_profit *($Discount->rate/100));
         }
         $Order->vendor_id = $vendor_id;
         $Order->cost = $cost;
         $Order->amount = $total_amount;
         $Order->discount_amount = $discount_amount;
         $Order->total_amount = $total_amount - $discount_amount;
+        $Order->total_profit = $total_profit;
         $Order->save();
         return $this->success_response([__('messages.created_successful')],[
             'Order'=>new OrderResource($Order)

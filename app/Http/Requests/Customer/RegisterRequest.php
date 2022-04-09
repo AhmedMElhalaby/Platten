@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Customer;
 
 use App\Http\Requests\ApiRequest;
-use App\Http\Resources\CustomerResource;
+use App\Http\Resources\Customer\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -35,11 +35,15 @@ class RegisterRequest extends ApiRequest
         $Customer->password = Hash::make($this->password);
         $Customer->save();
         $Customer->refresh();
+        $tokenResult = $Customer->createToken('Customer Token');
+        $token = $tokenResult->token;
+        $token->save();
+        $Customer->refresh();
         return $this->success_response([],[
             'Customer'=>new CustomerResource($Customer),
             'Login'=>[
                 'token_type'=>'Bearer',
-                'access_token'=>$Customer->createToken('Customer Token')->plainTextToken
+                'access_token'=>$tokenResult->accessToken
             ]
         ]);
     }

@@ -26,7 +26,7 @@ class StoreRequest extends ApiRequest
             'cost_price'=>'required|numeric',
             'profit_rate'=>'required|numeric',
             'discount'=>'nullable|numeric',
-            'product_type'=>'required|in:'.implode(',',array_values(Product::ProductTypes)),
+            'type'=>'required|in:'.implode(',',array_values(Product::Types)),
         ];
     }
     public function attributes(): array
@@ -42,7 +42,7 @@ class StoreRequest extends ApiRequest
             'cost_price'=>__('models.Product.cost_price'),
             'profit_rate'=>__('models.Product.profit_rate'),
             'discount'=>__('models.Product.discount'),
-            'product_type'=>__('models.Product.product_type'),
+            'type'=>__('models.Product.type'),
         ];
     }
     public function run(): JsonResponse
@@ -60,7 +60,7 @@ class StoreRequest extends ApiRequest
         $Product->profit_rate = $this->profit_rate;
         $Product->sell_price = $this->cost_price + $this->profit_rate;
         $Product->discount = $this->discount;
-        $Product->product_type = $this->product_type;
+        $Product->type = $this->type;
         $Product->save();
         $Product->refresh();
         return $this->success_response([__('messages.created_successful')],['Product'=>new ProductResource($Product)]);

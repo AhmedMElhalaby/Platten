@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Customer;
+namespace App\Http\Requests\Customer\Cart;
 
 use App\Http\Requests\ApiRequest;
-use App\Http\Resources\Customer\CustomerResource;
-use App\Models\Customer;
+use App\Http\Resources\Customer\CartResource;
+use App\Models\Cart;
 use Illuminate\Http\JsonResponse;
 
 class IndexRequest extends ApiRequest
@@ -25,17 +25,12 @@ class IndexRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Customers = new Customer();
+        $Carts = new Cart();
+        $Carts = $Carts->where('customer_id',auth('customer')->user()->id);
         if ($this->filled('q')) {
-            $Customers = $Customers->where('name','Like','%'.$this->q.'%');
+            $Carts = $Carts->where('name','Like','%'.$this->q.'%');
         }
-        $Customers = $Customers->paginate($this->per_page??10);
-        return $this->success_response([],
-        [
-            'Customers'=>CustomerResource::collection($Customers->items())
-        ],
-        [
-            'Customers'=>$Customers
-        ]);
+        $Carts = $Carts->paginate($this->per_page??10);
+        return $this->success_response([],['Carts'=>CartResource::collection($Carts->items())],['Carts'=>$Carts]);
     }
 }

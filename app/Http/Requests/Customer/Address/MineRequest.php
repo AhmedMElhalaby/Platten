@@ -7,12 +7,16 @@ use App\Http\Resources\Customer\AddressResource;
 use App\Models\Address;
 use Illuminate\Http\JsonResponse;
 
-class IndexRequest extends ApiRequest
+class MineRequest extends ApiRequest
 {
+    public function authorize(): bool
+    {
+        return auth('customer')->check();
+    }
+
     public function rules():array
     {
         return [
-            'customer_id'=>'nullable|exists:customers,id',
             'per_page'=>'nullable|numeric',
             'q'=>'nullable|string|max:255'
         ];
@@ -20,7 +24,6 @@ class IndexRequest extends ApiRequest
     public function attributes(): array
     {
         return [
-            'customer_id'=>__('models.Address.customer_id'),
             'q'=>__('models.q'),
             'per_page'=>__('models.per_page'),
         ];
@@ -28,9 +31,7 @@ class IndexRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $Addresses = new Address();
-        if ($this->filled('customer_id')) {
-            $Addresses = $Addresses->where('customer_id',$this->customer_id);
-        }
+        $Addresses = $Addresses->where('customer_id',auth('customer')->user()->id);
         if ($this->filled('q')) {
             $Addresses = $Addresses->where('name','Like','%'.$this->q.'%');
         }

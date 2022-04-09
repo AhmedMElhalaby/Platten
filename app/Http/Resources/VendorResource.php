@@ -22,8 +22,8 @@ class VendorResource extends JsonResource
             'address_alt'=>$this->address_alt,
             'maroof_tax_number'=>$this->maroof_tax_number,
             'maroof_company_number'=>$this->maroof_company_number,
-            'avatar'=>$this->avatar,
-            'cover'=>$this->cover,
+            'avatar'=>asset($this->avatar),
+            'cover'=>asset($this->cover),
         ];
     }
 }

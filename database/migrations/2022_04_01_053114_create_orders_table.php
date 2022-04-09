@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->double('cost')->default(0);
             $table->double('amount')->default(0);
             $table->double('total_amount')->default(0);
+            $table->double('total_profit')->default(0);
             $table->string('recipient_name');
             $table->string('mobile');
             $table->string('address');

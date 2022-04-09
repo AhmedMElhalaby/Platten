@@ -7,6 +7,7 @@ use App\Http\Requests\Vendor\DestroyRequest;
 use App\Http\Requests\Vendor\IndexRequest;
 use App\Http\Requests\Vendor\LoginRequest;
 use App\Http\Requests\Vendor\LogoutRequest;
+use App\Http\Requests\Vendor\MeRequest;
 use App\Http\Requests\Vendor\RegisterRequest;
 use App\Http\Requests\Vendor\ShowRequest;
 use App\Http\Requests\Vendor\StoreRequest;
@@ -19,6 +20,10 @@ class VendorController extends Controller
         return $request->run();
     }
     public function register(RegisterRequest $request)
+    {
+        return $request->run();
+    }
+    public function me(MeRequest $request)
     {
         return $request->run();
     }

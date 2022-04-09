@@ -16,7 +16,6 @@ class StoreRequest extends ApiRequest
     public function rules():array
     {
         return [
-            'customer_id'=>'required|exists:customers,id',
             'recipient_name'=>'required|string|max:255',
             'mobile'=>'required|string|max:255',
             'address'=>'required|string|max:255',
@@ -29,7 +28,6 @@ class StoreRequest extends ApiRequest
     public function attributes(): array
     {
         return [
-            'customer_id'=>__('models.Address.customer_id'),
             'recipient_name'=>__('models.Address.recipient_name'),
             'mobile'=>__('models.Address.mobile'),
             'address'=>__('models.Address.address'),
@@ -42,7 +40,7 @@ class StoreRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $Address = new Address();
-        $Address->customer_id = $this->customer_id;
+        $Address->customer_id = auth('customer')->user()->id;
         $Address->recipient_name = $this->recipient_name;
         $Address->mobile = $this->mobile;
         $Address->address = $this->address;

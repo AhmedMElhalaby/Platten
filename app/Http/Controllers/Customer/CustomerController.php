@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\DestroyRequest;
+use App\Http\Requests\Customer\IndexRequest;
 use App\Http\Requests\Customer\LoginRequest;
 use App\Http\Requests\Customer\LogoutRequest;
 use App\Http\Requests\Customer\RegisterRequest;
-use App\Http\Requests\Customer\IndexRequest;
 use App\Http\Requests\Customer\ShowRequest;
 use App\Http\Requests\Customer\StoreRequest;
 use App\Http\Requests\Customer\UpdateRequest;
-use App\Http\Requests\Customer\DestroyRequest;
 
 class CustomerController extends Controller
 {

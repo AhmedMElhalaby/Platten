@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Customer;
 
 use App\Http\Requests\ApiRequest;
-use App\Http\Resources\CustomerResource;
+use App\Http\Resources\Customer\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
