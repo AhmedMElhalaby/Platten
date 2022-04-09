@@ -15,7 +15,7 @@ class CreateProductsMediaTable extends Migration
     {
         Schema::create('products_media', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_type_id')->constrained();
+            $table->foreignId('product_type_id')->constrained('products_types');
             $table->string('path');
             $table->tinyInteger('mime_type');
             $table->timestamps();
