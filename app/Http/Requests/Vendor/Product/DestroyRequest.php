@@ -10,7 +10,7 @@ class DestroyRequest extends ApiRequest
 {
     public function authorize():bool
     {
-        return auth('employee')->check();
+        return auth('vendor')->check();
     }
     public function rules():array
     {

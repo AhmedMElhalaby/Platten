@@ -25,7 +25,9 @@ class StoreRequest extends ApiRequest
             'product_type_model_size_id'=>'required|exists:products_types_models_sizes,id',
             'cost_price'=>'required|numeric',
             'profit_rate'=>'required|numeric',
+            'quantity'=>'required|numeric',
             'discount'=>'nullable|numeric',
+            'note'=>'nullable|string',
             'type'=>'required|in:'.implode(',',array_values(Product::Types)),
         ];
     }
@@ -40,9 +42,11 @@ class StoreRequest extends ApiRequest
             'product_type_model_color_id'=>__('models.Product.product_type_model_color_id'),
             'product_type_model_size_id'=>__('models.Product.product_type_model_size_id'),
             'cost_price'=>__('models.Product.cost_price'),
+            'quantity'=>__('models.Product.quantity'),
             'profit_rate'=>__('models.Product.profit_rate'),
             'discount'=>__('models.Product.discount'),
             'type'=>__('models.Product.type'),
+            'note'=>__('models.Product.note'),
         ];
     }
     public function run(): JsonResponse
@@ -59,8 +63,10 @@ class StoreRequest extends ApiRequest
         $Product->cost_price = $this->cost_price;
         $Product->profit_rate = $this->profit_rate;
         $Product->sell_price = $this->cost_price + $this->profit_rate;
+        $Product->quantity = $this->quantity;
         $Product->discount = $this->discount;
         $Product->type = $this->type;
+        $Product->note = $this->note;
         $Product->save();
         $Product->refresh();
         return $this->success_response([__('messages.created_successful')],['Product'=>new ProductResource($Product)]);

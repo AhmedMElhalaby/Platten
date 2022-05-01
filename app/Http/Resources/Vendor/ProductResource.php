@@ -38,11 +38,14 @@ class ProductResource extends JsonResource
             'ProductTypeModelSize'=>new ProductTypeModelSizeResource($this->product_type_model_size),
             'ProductMedia'=>($this->product_type->media()->count() >0)?(new ProductTypeMediaResource($this->product_type->media)):[],
             'type'=>$this->type,
+            'quantity'=>$this->quantity,
             'cost_price'=>$this->cost_price,
             'profit_rate'=>$this->profit_rate,
             'sell_price'=>$this->sell_price,
             'discount'=>$this->discount,
             'status'=>$this->status,
+            'sold_quantity'=>$this->sold_quantity,
+            'note'=>$this->note
         ];
     }
 }

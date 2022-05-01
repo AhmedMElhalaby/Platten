@@ -28,6 +28,9 @@ class CreateProductsTable extends Migration
             $table->double('sell_price');
             $table->double('discount')->default(0);
             $table->tinyInteger('type');
+            $table->integer('quantity');
+            $table->integer('sold_quantity')->default(0);
+            $table->string('note')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

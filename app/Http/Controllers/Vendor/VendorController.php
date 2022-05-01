@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\DestroyRequest;
+use App\Http\Requests\Vendor\ForgetPasswordRequest;
 use App\Http\Requests\Vendor\IndexRequest;
 use App\Http\Requests\Vendor\LoginRequest;
 use App\Http\Requests\Vendor\LogoutRequest;
 use App\Http\Requests\Vendor\MeRequest;
 use App\Http\Requests\Vendor\RegisterRequest;
+use App\Http\Requests\Vendor\ResetPasswordRequest;
 use App\Http\Requests\Vendor\ShowRequest;
 use App\Http\Requests\Vendor\StoreRequest;
 use App\Http\Requests\Vendor\UpdateRequest;
@@ -48,6 +50,14 @@ class VendorController extends Controller
         return $request->run();
     }
     public function destroy(DestroyRequest $request)
+    {
+        return $request->run();
+    }
+    public function forget_password(ForgetPasswordRequest $request)
+    {
+        return $request->run();
+    }
+    public function reset_password(ResetPasswordRequest $request)
     {
         return $request->run();
     }

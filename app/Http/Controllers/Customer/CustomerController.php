@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\DestroyRequest;
+use App\Http\Requests\Customer\ForgetPasswordRequest;
 use App\Http\Requests\Customer\IndexRequest;
 use App\Http\Requests\Customer\LoginRequest;
 use App\Http\Requests\Customer\LogoutRequest;
 use App\Http\Requests\Customer\RegisterRequest;
+use App\Http\Requests\Customer\ResetPasswordRequest;
 use App\Http\Requests\Customer\ShowRequest;
 use App\Http\Requests\Customer\StoreRequest;
 use App\Http\Requests\Customer\UpdateRequest;
@@ -43,6 +45,14 @@ class CustomerController extends Controller
         return $request->run();
     }
     public function destroy(DestroyRequest $request)
+    {
+        return $request->run();
+    }
+    public function forget_password(ForgetPasswordRequest $request)
+    {
+        return $request->run();
+    }
+    public function reset_password(ResetPasswordRequest $request)
     {
         return $request->run();
     }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\DestroyRequest;
+use App\Http\Requests\Employee\ForgetPasswordRequest;
 use App\Http\Requests\Employee\IndexRequest;
 use App\Http\Requests\Employee\LoginRequest;
 use App\Http\Requests\Employee\LogoutRequest;
+use App\Http\Requests\Employee\ResetPasswordRequest;
 use App\Http\Requests\Employee\ShowRequest;
 use App\Http\Requests\Employee\StoreRequest;
 use App\Http\Requests\Employee\UpdateRequest;
@@ -38,6 +40,14 @@ class EmployeeController extends Controller
         return $request->run();
     }
     public function destroy(DestroyRequest $request)
+    {
+        return $request->run();
+    }
+    public function forget_password(ForgetPasswordRequest $request)
+    {
+        return $request->run();
+    }
+    public function reset_password(ResetPasswordRequest $request)
     {
         return $request->run();
     }
