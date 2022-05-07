@@ -7,14 +7,14 @@ Route::group([
 ], function () {
     Route::post('login','VendorController@login');
     Route::post('register','VendorController@register');
+    Route::post('password/forget','VendorController@forget_password');
+    Route::post('password/reset','VendorController@reset_password');
     Route::group([
         'middleware' => 'auth:vendor'
     ], function() {
         Route::get('me','VendorController@me');
         Route::post('update','VendorController@update');
         Route::post('logout','VendorController@logout');
-        Route::post('password/forget','VendorController@forget_password');
-        Route::post('password/reset','VendorController@reset_password');
     });
     Route::group([
         'prefix' => 'products',
@@ -51,12 +51,12 @@ Route::group([
 ], function () {
     Route::post('login','CustomerController@login');
     Route::post('register','CustomerController@register');
+    Route::post('password/forget','CustomerController@forget_password');
+    Route::post('password/reset','CustomerController@reset_password');
     Route::group([
         'middleware' => 'auth:customer'
     ], function() {
         Route::post('logout','CustomerController@logout');
-        Route::post('password/forget','CustomerController@forget_password');
-        Route::post('password/reset','CustomerController@reset_password');
 
     });
     Route::group([
@@ -98,12 +98,12 @@ Route::group([
 ], function () {
     Route::post('login','EmployeeController@login');
     Route::post('register','EmployeeController@register');
+    Route::post('password/forget','EmployeeController@forget_password');
+    Route::post('password/reset','EmployeeController@reset_password');
     Route::group([
         'middleware' => 'auth:employee'
     ], function() {
         Route::post('logout','EmployeeController@logout');
-        Route::post('password/forget','EmployeeController@forget_password');
-        Route::post('password/reset','EmployeeController@reset_password');
     });
 });
 
