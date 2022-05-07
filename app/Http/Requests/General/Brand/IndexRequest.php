@@ -5,6 +5,7 @@ namespace App\Http\Requests\General\Brand;
 use App\Http\Requests\ApiRequest;
 use App\Http\Resources\General\BrandResource;
 use App\Models\Brand;
+use App\Models\BrandSubCategory;
 use Illuminate\Http\JsonResponse;
 
 class IndexRequest extends ApiRequest
@@ -31,7 +32,7 @@ class IndexRequest extends ApiRequest
         $Brands = (new Brand())->when($this->filled('q'),function($q){
             return $q->where('name','Like','%'.$this->q.'%');
         })->when($this->filled('sub_category_id'),function($q){
-            $BrandsId = Brand::where('sub_category_id',$this->sub_category_id)->pluck('brand_id');
+            $BrandsId = BrandSubCategory::where('sub_category_id',$this->sub_category_id)->pluck('brand_id');
             return $q->whereIn('id',$BrandsId);
         })->paginate($this->per_page??10);
         return $this->success_response([],[
