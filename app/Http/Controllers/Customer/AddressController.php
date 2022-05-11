@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\Address\DestroyRequest;
 use App\Http\Requests\Customer\Address\IndexRequest;
-use App\Http\Requests\Customer\Address\MyAddressRequest;
+use App\Http\Requests\Customer\Address\MineRequest;
 use App\Http\Requests\Customer\Address\ShowRequest;
 use App\Http\Requests\Customer\Address\StoreRequest;
 use App\Http\Requests\Customer\Address\UpdateRequest;

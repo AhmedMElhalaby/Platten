@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Employee\DestroyRequest;
-use App\Http\Requests\Employee\ForgetPasswordRequest;
-use App\Http\Requests\Employee\IndexRequest;
-use App\Http\Requests\Employee\LoginRequest;
-use App\Http\Requests\Employee\LogoutRequest;
-use App\Http\Requests\Employee\ResetPasswordRequest;
-use App\Http\Requests\Employee\ShowRequest;
-use App\Http\Requests\Employee\StoreRequest;
-use App\Http\Requests\Employee\UpdateRequest;
+use App\Http\Requests\Employee\Auth\DestroyRequest;
+use App\Http\Requests\Employee\Auth\ForgetPasswordRequest;
+use App\Http\Requests\Employee\Auth\IndexRequest;
+use App\Http\Requests\Employee\Auth\LoginRequest;
+use App\Http\Requests\Employee\Auth\LogoutRequest;
+use App\Http\Requests\Employee\Auth\ResetPasswordRequest;
+use App\Http\Requests\Employee\Auth\ShowRequest;
+use App\Http\Requests\Employee\Auth\StoreRequest;
+use App\Http\Requests\Employee\Auth\UpdatePasswordRequest;
+use App\Http\Requests\Employee\Auth\UpdateRequest;
 
 class EmployeeController extends Controller
 {
@@ -36,6 +37,10 @@ class EmployeeController extends Controller
         return $request->run();
     }
     public function update(UpdateRequest $request)
+    {
+        return $request->run();
+    }
+    public function update_password(UpdatePasswordRequest $request)
     {
         return $request->run();
     }

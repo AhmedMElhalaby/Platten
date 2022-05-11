@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Vendor\DestroyRequest;
-use App\Http\Requests\Vendor\ForgetPasswordRequest;
-use App\Http\Requests\Vendor\IndexRequest;
-use App\Http\Requests\Vendor\LoginRequest;
-use App\Http\Requests\Vendor\LogoutRequest;
-use App\Http\Requests\Vendor\MeRequest;
-use App\Http\Requests\Vendor\RegisterRequest;
-use App\Http\Requests\Vendor\ResetPasswordRequest;
-use App\Http\Requests\Vendor\ShowRequest;
-use App\Http\Requests\Vendor\StoreRequest;
-use App\Http\Requests\Vendor\UpdateRequest;
+use App\Http\Requests\Vendor\Auth\DestroyRequest;
+use App\Http\Requests\Vendor\Auth\ForgetPasswordRequest;
+use App\Http\Requests\Vendor\Auth\IndexRequest;
+use App\Http\Requests\Vendor\Auth\LoginRequest;
+use App\Http\Requests\Vendor\Auth\LogoutRequest;
+use App\Http\Requests\Vendor\Auth\MeRequest;
+use App\Http\Requests\Vendor\Auth\RegisterRequest;
+use App\Http\Requests\Vendor\Auth\ResetPasswordRequest;
+use App\Http\Requests\Vendor\Auth\ShowRequest;
+use App\Http\Requests\Vendor\Auth\StoreRequest;
+use App\Http\Requests\Vendor\Auth\UpdatePasswordRequest;
+use App\Http\Requests\Vendor\Auth\UpdateRequest;
 
 class VendorController extends Controller
 {
@@ -46,6 +47,10 @@ class VendorController extends Controller
         return $request->run();
     }
     public function update(UpdateRequest $request)
+    {
+        return $request->run();
+    }
+    public function update_password(UpdatePasswordRequest $request)
     {
         return $request->run();
     }

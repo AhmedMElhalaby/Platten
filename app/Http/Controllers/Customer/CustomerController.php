@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Customer\DestroyRequest;
-use App\Http\Requests\Customer\ForgetPasswordRequest;
-use App\Http\Requests\Customer\IndexRequest;
-use App\Http\Requests\Customer\LoginRequest;
-use App\Http\Requests\Customer\LogoutRequest;
-use App\Http\Requests\Customer\RegisterRequest;
-use App\Http\Requests\Customer\ResetPasswordRequest;
-use App\Http\Requests\Customer\ShowRequest;
-use App\Http\Requests\Customer\StoreRequest;
-use App\Http\Requests\Customer\UpdateRequest;
+use App\Http\Requests\Customer\Auth\DestroyRequest;
+use App\Http\Requests\Customer\Auth\ForgetPasswordRequest;
+use App\Http\Requests\Customer\Auth\IndexRequest;
+use App\Http\Requests\Customer\Auth\LoginRequest;
+use App\Http\Requests\Customer\Auth\LogoutRequest;
+use App\Http\Requests\Customer\Auth\RegisterRequest;
+use App\Http\Requests\Customer\Auth\ResetPasswordRequest;
+use App\Http\Requests\Customer\Auth\ShowRequest;
+use App\Http\Requests\Customer\Auth\StoreRequest;
+use App\Http\Requests\Customer\Auth\UpdatePasswordRequest;
+use App\Http\Requests\Customer\Auth\UpdateRequest;
 
 class CustomerController extends Controller
 {
@@ -41,6 +42,10 @@ class CustomerController extends Controller
         return $request->run();
     }
     public function update(UpdateRequest $request)
+    {
+        return $request->run();
+    }
+    public function update_password(UpdatePasswordRequest $request)
     {
         return $request->run();
     }

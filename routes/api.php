@@ -14,6 +14,7 @@ Route::group([
     ], function() {
         Route::get('me','VendorController@me');
         Route::post('update','VendorController@update');
+        Route::post('update/password','VendorController@update_password');
         Route::post('logout','VendorController@logout');
     });
     Route::group([
@@ -56,6 +57,8 @@ Route::group([
     Route::group([
         'middleware' => 'auth:customer'
     ], function() {
+        Route::post('update','CustomerController@update');
+        Route::post('update/password','CustomerController@update_password');
         Route::post('logout','CustomerController@logout');
 
     });
@@ -103,6 +106,8 @@ Route::group([
     Route::group([
         'middleware' => 'auth:employee'
     ], function() {
+        Route::post('update','EmployeeController@update');
+        Route::post('update/password','EmployeeController@update_password');
         Route::post('logout','EmployeeController@logout');
     });
 });
