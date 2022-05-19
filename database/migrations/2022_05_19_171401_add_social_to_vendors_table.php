@@ -19,6 +19,7 @@ class AddSocialToVendorsTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
             $table->string('website')->nullable();
+            $table->string('maaroof_url')->nullable();
         });
     }
 
@@ -35,6 +36,7 @@ class AddSocialToVendorsTable extends Migration
             $table->dropColumn('instagram');
             $table->dropColumn('facebook');
             $table->dropColumn('website');
+            $table->dropColumn('maaroof_url');
         });
     }
 }

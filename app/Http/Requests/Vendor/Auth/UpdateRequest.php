@@ -97,6 +97,9 @@ class UpdateRequest extends ApiRequest
         if ($this->filled('website')) {
             $Vendor->website = $this->website;
         }
+        if ($this->filled('maaroof_url')) {
+            $Vendor->maaroof_url = $this->maaroof_url;
+        }
         if ($this->filled('address_alt')) {
             $Vendor->address_alt = $this->address_alt;
         }

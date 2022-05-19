@@ -23,6 +23,7 @@ class VendorResource extends JsonResource
             'instagram'=>$this->instagram,
             'facebook'=>$this->facebook,
             'website'=>$this->website,
+            'maaroof_url'=>$this->maaroof_url,
             'address'=>$this->address,
             'address_alt'=>$this->address_alt,
             'maroof_tax_number'=>$this->maroof_tax_number,
