@@ -82,6 +82,21 @@ class UpdateRequest extends ApiRequest
         if ($this->filled('address')) {
             $Vendor->address = $this->address;
         }
+        if ($this->filled('snapchat')) {
+            $Vendor->snapchat = $this->snapchat;
+        }
+        if ($this->filled('twitter')) {
+            $Vendor->twitter = $this->twitter;
+        }
+        if ($this->filled('instagram')) {
+            $Vendor->instagram = $this->instagram;
+        }
+        if ($this->filled('facebook')) {
+            $Vendor->facebook = $this->facebook;
+        }
+        if ($this->filled('website')) {
+            $Vendor->website = $this->website;
+        }
         if ($this->filled('address_alt')) {
             $Vendor->address_alt = $this->address_alt;
         }
