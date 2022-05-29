@@ -17,8 +17,8 @@ class UpdatePasswordRequest extends ApiRequest
     public function rules():array
     {
         return [
-            'old_password'=>'required|string|min:8|max:255',
-            'password'=>'required|confirmed|string|min:8|max:255',
+            'old_password'=>'required|string|min:6|max:255',
+            'password'=>'required|confirmed|string|min:6|max:255',
         ];
     }
     public function attributes(): array

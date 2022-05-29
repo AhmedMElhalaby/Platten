@@ -16,7 +16,7 @@ class RegisterRequest extends ApiRequest
         return [
             'name'=>'required|string|max:255',
             'email'=>'required|string|email|unique:vendors,email|max:255',
-            'password'=>'required|string|confirmed|max:255',
+            'password'=>'required|string|confirmed|min:6|max:255',
         ];
     }
     public function attributes(): array

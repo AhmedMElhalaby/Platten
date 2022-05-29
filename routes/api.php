@@ -5,6 +5,7 @@ Route::group([
     'prefix' => 'vendors',
     'namespace' => 'Vendor'
 ], function () {
+    Route::get('index','VendorController@index');
     Route::post('login','VendorController@login');
     Route::post('register','VendorController@register');
     Route::post('password/forget','VendorController@forget_password');
@@ -79,6 +80,14 @@ Route::group([
         ], function() {
             Route::get('/','AddressController@index');
         });
+    });
+    Route::group([
+        'prefix' => 'favourites',
+        'middleware' => 'auth:customer'
+    ], function () {
+        Route::get('index','FavouriteController@index');
+        Route::get('show','FavouriteController@show');
+        Route::post('toggle','FavouriteController@toggle');
     });
     Route::group([
         'prefix' => 'carts',

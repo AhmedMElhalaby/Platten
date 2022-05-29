@@ -28,12 +28,12 @@ class IndexRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $data = $this->all();
-        $Orders = (new Order())->when($this->filled('q'),function($q) use($data){
-            return $q->where('name','Like','%'.$data['q'].'%');
-        })->when($this->filled('customer_id'),function($q) use($data){
+        $Orders = (new Order())->when($this->filled('customer_id'),function($q) use($data){
             return $q->where('customer_id',$data['customer_id']);
         })->when($this->filled('vendor_id'),function($q) use($data){
             return $q->where('vendor_id',$data['vendor_id']);
+        })->when($this->filled('status'),function($q) use($data){
+            return $q->where('status',$data['status']);
         })->paginate($this->per_page??10);
         return $this->success_response([],[
             'Orders'=>OrderResource::collection($Orders->items())

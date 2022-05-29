@@ -11,7 +11,7 @@ class LogoutRequest extends ApiRequest
 {
     public function authorize(): bool
     {
-        return auth('employee')->check();
+        return auth('customer')->check();
     }
     public function run(): JsonResponse
     {
