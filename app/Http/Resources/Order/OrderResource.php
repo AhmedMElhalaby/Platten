@@ -28,7 +28,7 @@ class OrderResource extends JsonResource
             'lng'=>$this->lng,
             'map_address'=>$this->map_address,
             'status'=>$this->status,
-            'OrderProducts'
+            'OrderProducts'=>OrderProductResource::collection($this->orders_products)
         ];
     }
 }
