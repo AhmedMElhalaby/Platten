@@ -6,6 +6,7 @@ Route::group([
     'namespace' => 'Vendor'
 ], function () {
     Route::get('index','VendorController@index');
+    Route::get('show','VendorController@index');
     Route::post('login','VendorController@login');
     Route::post('register','VendorController@register');
     Route::post('password/forget','VendorController@forget_password');

@@ -11,7 +11,8 @@ class AddressResource extends JsonResource
         return [
             'id'=>$this->id,
             'customer_id'=>$this->customer_id,
-            'recipient_name'=>$this->recipient_name,
+            'recipient_first_name'=>$this->recipient_first_name,
+            'recipient_last_name'=>$this->recipient_last_name,
             'mobile'=>$this->mobile,
             'address'=>$this->address,
             'type'=>$this->type,

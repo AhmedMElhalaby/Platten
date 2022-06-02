@@ -20,6 +20,8 @@ class Order extends Model
         'Finished'=>4,
         'Canceled'=>5,
         'Rejected'=>6,
+        'NotReceived'=>7,
+        'NotDelivered'=>7,
     ];
     public function customer(): BelongsTo
     {

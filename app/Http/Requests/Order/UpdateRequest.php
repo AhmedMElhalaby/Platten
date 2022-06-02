@@ -55,6 +55,12 @@ class UpdateRequest extends ApiRequest
             case Order::Statuses['Paid']:{
                 $Order->status = Order::Statuses['Paid'];
                 $Order->save();
+                foreach ($Order->orders_products as $orders_product){
+                    $Product = $orders_product->product;
+                    $Product->quantity = $Product->quantity -$orders_product->quantity;
+                    $Product->sold_quantity = $Product->sold_quantity +$orders_product->quantity;
+                    $Product->save();
+                }
                 break;
             }
             case Order::Statuses['InProgress']:{
@@ -64,6 +70,32 @@ class UpdateRequest extends ApiRequest
             }
             case Order::Statuses['Finished']:{
                 $Order->status = Order::Statuses['Finished'];
+                $Order->save();
+                break;
+            }
+            case Order::Statuses['NotReceived']:{
+                if($Order->status != Order::Statuses['NotDelivered']){
+                    foreach ($Order->orders_products as $orders_product){
+                        $Product = $orders_product->product;
+                        $Product->quantity = $Product->quantity +$orders_product->quantity;
+                        $Product->sold_quantity = $Product->sold_quantity -$orders_product->quantity;
+                        $Product->save();
+                    }
+                }
+                $Order->status = Order::Statuses['NotReceived'];
+                $Order->save();
+                break;
+            }
+            case Order::Statuses['NotDelivered']:{
+                if($Order->status != Order::Statuses['NotReceived']){
+                    foreach ($Order->orders_products as $orders_product){
+                        $Product = $orders_product->product;
+                        $Product->quantity = $Product->quantity +$orders_product->quantity;
+                        $Product->sold_quantity = $Product->sold_quantity -$orders_product->quantity;
+                        $Product->save();
+                    }
+                }
+                $Order->status = Order::Statuses['NotDelivered'];
                 $Order->save();
                 break;
             }

@@ -12,6 +12,7 @@ use App\Http\Resources\General\Product\ProductTypeResource;
 use App\Http\Resources\General\SubCategoryResource;
 use App\Http\Resources\VendorResource;
 use App\Models\Category;
+use App\Models\Favourite;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -45,7 +46,8 @@ class ProductResource extends JsonResource
             'discount'=>$this->discount,
             'status'=>$this->status,
             'sold_quantity'=>$this->sold_quantity,
-            'note'=>$this->note
+            'note'=>$this->note,
+            'is_favourite'=>(auth('customer')->check())?(Favourite::where('customer_id',auth('customer')->user()->id)->where('product_id',$this->id)->first()?'1':'0') :'0'
         ];
     }
 }

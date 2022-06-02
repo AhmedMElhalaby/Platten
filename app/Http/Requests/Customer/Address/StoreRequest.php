@@ -16,7 +16,8 @@ class StoreRequest extends ApiRequest
     public function rules():array
     {
         return [
-            'recipient_name'=>'required|string|max:255',
+            'recipient_first_name'=>'required|string|max:255',
+            'recipient_last_name'=>'required|string|max:255',
             'mobile'=>'required|string|max:255',
             'address'=>'required|string|max:255',
             'type'=>'required|in:'.implode(',',array_values(Address::Types)),
@@ -28,7 +29,8 @@ class StoreRequest extends ApiRequest
     public function attributes(): array
     {
         return [
-            'recipient_name'=>__('models.Address.recipient_name'),
+            'recipient_first_name'=>__('models.Address.recipient_first_name'),
+            'recipient_last_name'=>__('models.Address.recipient_last_name'),
             'mobile'=>__('models.Address.mobile'),
             'address'=>__('models.Address.address'),
             'type'=>__('models.Address.type'),
@@ -41,7 +43,8 @@ class StoreRequest extends ApiRequest
     {
         $Address = new Address();
         $Address->customer_id = auth('customer')->user()->id;
-        $Address->recipient_name = $this->recipient_name;
+        $Address->recipient_first_name = $this->recipient_first_name;
+        $Address->recipient_last_name = $this->recipient_last_name;
         $Address->mobile = $this->mobile;
         $Address->address = $this->address;
         $Address->type = $this->type;

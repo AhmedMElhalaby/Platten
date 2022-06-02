@@ -18,7 +18,8 @@ class UpdateRequest extends ApiRequest
     {
         return [
             'address_id'=>'required|exists:addresses,id',
-            'recipient_name'=>'nullable|string|max:255',
+            'recipient_first_name'=>'nullable|string|max:255',
+            'recipient_last_name'=>'nullable|string|max:255',
             'mobile'=>'nullable|string|max:255',
             'address'=>'nullable|string|max:255',
             'type'=>'nullable|in:'.implode(',',array_values(Address::Types)),
@@ -31,7 +32,8 @@ class UpdateRequest extends ApiRequest
     {
         return [
             'address_id'=>__('models.Address.address_id'),
-            'recipient_name'=>__('models.Address.recipient_name'),
+            'recipient_first_name'=>__('models.Address.recipient_first_name'),
+            'recipient_last_name'=>__('models.Address.recipient_last_name'),
             'mobile'=>__('models.Address.mobile'),
             'address'=>__('models.Address.address'),
             'type'=>__('models.Address.type'),
@@ -43,8 +45,11 @@ class UpdateRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $Address = (new Address())->find($this->address_id);
-        if ($this->filled('recipient_name')) {
-            $Address->recipient_name = $this->recipient_name;
+        if ($this->filled('recipient_first_name')) {
+            $Address->recipient_first_name = $this->recipient_first_name;
+        }
+        if ($this->filled('recipient_last_name')) {
+            $Address->recipient_last_name = $this->recipient_last_name;
         }
         if ($this->filled('mobile')) {
             $Address->mobile = $this->mobile;
