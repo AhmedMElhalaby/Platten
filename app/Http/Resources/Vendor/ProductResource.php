@@ -48,7 +48,7 @@ class ProductResource extends JsonResource
             'status'=>$this->status,
             'sold_quantity'=>$this->sold_quantity,
             'note'=>$this->note,
-            'rate'=>''.Review::where('product_id',$this->product_id)->avg('rate'),
+            'rate'=>''.(Review::where('product_id',$this->product_id)->avg('rate')??0),
             'is_favourite'=>(auth('customer')->check())?(Favourite::where('customer_id',auth('customer')->user()->id)->where('product_id',$this->id)->first()?'1':'0') :'0'
         ];
     }
