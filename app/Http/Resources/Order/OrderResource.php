@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Order;
 
 use App\Http\Resources\Customer\CustomerResource;
+use App\Http\Resources\Vendor\ReviewResource;
 use App\Http\Resources\VendorResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,7 +29,8 @@ class OrderResource extends JsonResource
             'lng'=>$this->lng,
             'map_address'=>$this->map_address,
             'status'=>$this->status,
-            'OrderProducts'=>OrderProductResource::collection($this->orders_products)
+            'OrderProducts'=>OrderProductResource::collection($this->orders_products),
+            'Reviews'=>ReviewResource::collection($this->reviews)
         ];
     }
 }

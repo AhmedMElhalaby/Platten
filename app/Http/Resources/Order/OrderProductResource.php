@@ -4,6 +4,7 @@ namespace App\Http\Resources\Order;
 
 use App\Http\Resources\Customer\CustomerResource;
 use App\Http\Resources\Vendor\ProductResource;
+use App\Http\Resources\Vendor\ReviewResource;
 use App\Http\Resources\VendorResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,7 @@ class OrderProductResource extends JsonResource
             'quantity'=>$this->quantity,
             'amount'=>$this->amount,
             'total'=>$this->total,
+            'Review'=>new ReviewResource($this->review),
         ];
     }
 }

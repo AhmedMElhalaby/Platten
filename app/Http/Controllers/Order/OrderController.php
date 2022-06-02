@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\IndexRequest;
+use App\Http\Requests\Order\ReviewRequest;
 use App\Http\Requests\Order\ShowRequest;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
@@ -23,6 +24,10 @@ class OrderController extends Controller
         return $request->run();
     }
     public function update(UpdateRequest $request)
+    {
+        return $request->run();
+    }
+    public function review(ReviewRequest $request)
     {
         return $request->run();
     }

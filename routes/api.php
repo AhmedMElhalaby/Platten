@@ -6,7 +6,7 @@ Route::group([
     'namespace' => 'Vendor'
 ], function () {
     Route::get('index','VendorController@index');
-    Route::get('show','VendorController@index');
+    Route::get('show','VendorController@show');
     Route::post('login','VendorController@login');
     Route::post('register','VendorController@register');
     Route::post('password/forget','VendorController@forget_password');
@@ -24,6 +24,7 @@ Route::group([
     ], function () {
         Route::get('/','ProductController@index');
         Route::get('show','ProductController@show');
+        Route::get('reviews','ProductController@reviews');
         Route::group([
             'middleware' => 'auth:vendor'
         ], function() {
@@ -345,4 +346,5 @@ Route::group([
     Route::get('show','OrderController@show');
     Route::post('store','OrderController@store');
     Route::post('update','OrderController@update');
+    Route::post('review','OrderController@review');
 });

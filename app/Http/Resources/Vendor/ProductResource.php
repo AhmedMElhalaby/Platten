@@ -13,6 +13,7 @@ use App\Http\Resources\General\SubCategoryResource;
 use App\Http\Resources\VendorResource;
 use App\Models\Category;
 use App\Models\Favourite;
+use App\Models\Review;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -47,6 +48,7 @@ class ProductResource extends JsonResource
             'status'=>$this->status,
             'sold_quantity'=>$this->sold_quantity,
             'note'=>$this->note,
+            'rate'=>''.Review::where('product_id',$this->product_id)->avg('rate'),
             'is_favourite'=>(auth('customer')->check())?(Favourite::where('customer_id',auth('customer')->user()->id)->where('product_id',$this->id)->first()?'1':'0') :'0'
         ];
     }
