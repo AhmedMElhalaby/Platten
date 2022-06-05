@@ -46,7 +46,7 @@ class StoreRequest extends ApiRequest
         $Address = Address::find($this->address_id);
         $Order = new Order();
         $Order->customer_id = auth('customer')->user()->id;
-        $Order->recipient_name = $Address->recipient_name;
+        $Order->recipient_name = $Address->recipient_first_name .' '.$Address->recipient_last_name;
         $Order->mobile = $Address->mobile;
         $Order->address = $Address->address;
         $Order->lat = $Address->lat;
