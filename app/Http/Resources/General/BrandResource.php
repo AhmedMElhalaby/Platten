@@ -11,7 +11,7 @@ class BrandResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'SubCategories'=>BrandSubCategoryResource::collection($this->brand_sub_categories),
+            'SubCategories'=>SubCategoryBasicResource::collection($this->sub_categories),
         ];
     }
 }

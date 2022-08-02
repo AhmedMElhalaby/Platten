@@ -314,6 +314,19 @@ Route::group([
             });
         });
     });
+    Route::group([
+        'prefix' => 'settings',
+    ], function () {
+        Route::get('/','SettingController@index');
+        Route::get('show','SettingController@show');
+        Route::group([
+            'middleware' => 'auth:employee'
+        ], function() {
+            Route::post('store','SettingController@store');
+            Route::post('update','SettingController@update');
+            Route::post('destroy','SettingController@destroy');
+        });
+    });
 });
 
 Route::group([

@@ -21,6 +21,8 @@ class UpdateRequest extends ApiRequest
         return [
             'name'=>'nullable|string|max:255',
             'email'=>'nullable|string|email|unique:customers,email|max:255',
+            'mobile'=>'nullable|string',
+            'avatar'=>'nullable|mimes:png,jpg,jpeg',
         ];
     }
     public function attributes(): array
@@ -29,6 +31,8 @@ class UpdateRequest extends ApiRequest
             'customer_id'=>__('models.Customer.customer_id'),
             'name'=>__('models.Customer.name'),
             'email'=>__('models.Customer.email'),
+            'mobile'=>__('models.Customer.mobile'),
+            'avatar'=>__('models.Customer.avatar'),
         ];
     }
     public function run(): JsonResponse
@@ -39,6 +43,14 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->filled('email')) {
             $Customer->email = $this->email;
+        }
+        if ($this->filled('mobile')){
+            $Customer->mobile = $this->mobile;
+        }
+        if ($this->hasFile('avatar')){
+            $media = $this->file('avatar');
+            $path = $media->store('public/files');
+            $Customer->avatar = $path;
         }
         $Customer->save();
         $Customer->refresh();

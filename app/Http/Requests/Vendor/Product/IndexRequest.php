@@ -45,6 +45,12 @@ class IndexRequest extends ApiRequest
             $Products = $Products->where('brand_id',$this->brand_id);
             $ProductTypes = $ProductTypes->where('brand_id',$this->brand_id);
         }
+        if ($this->filled('type')) {
+            $Products = $Products->where('type',$this->type);
+        }
+        if ($this->filled('price_from') && $this->filled('price_to')) {
+            $Products = $Products->whereBetween('sell_price',[$this->price_from,$this->price_to]);
+        }
         if ($this->filled('q')) {
             $ProductTypes = $ProductTypes->where('name','Like','%'.$this->q.'%')->plcuk('id');
             $q = $this->q;
@@ -52,7 +58,8 @@ class IndexRequest extends ApiRequest
                 return $query->whereIn('product_type_id',$ProductTypes)->orWhere('note','Like','%'.$q.'%');
             });
         }
+        $ProductsCount = $Products->count();
         $Products = $Products->paginate($this->per_page??10);
-        return $this->success_response([],['Products'=>ProductResource::collection($Products->items())],['Products'=>$Products]);
+        return $this->success_response([],['Products'=>ProductResource::collection($Products->items()),'ProductsCount'=>$ProductsCount],['Products'=>$Products]);
     }
 }

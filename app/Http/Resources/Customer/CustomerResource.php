@@ -12,6 +12,8 @@ class CustomerResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'email'=>$this->email,
+            'mobile'=>$this->mobile,
+            'avatar'=>asset($this->avatar),
         ];
     }
 }
