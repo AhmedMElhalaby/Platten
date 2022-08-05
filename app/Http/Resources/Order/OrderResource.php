@@ -5,6 +5,7 @@ namespace App\Http\Resources\Order;
 use App\Http\Resources\Customer\CustomerResource;
 use App\Http\Resources\Vendor\ReviewResource;
 use App\Http\Resources\VendorResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -30,7 +31,8 @@ class OrderResource extends JsonResource
             'map_address'=>$this->map_address,
             'status'=>$this->status,
             'OrderProducts'=>OrderProductResource::collection($this->orders_products),
-            'Reviews'=>ReviewResource::collection($this->reviews)
+            'Reviews'=>ReviewResource::collection($this->reviews),
+            'created_at'=>Carbon::parse($this->created_at)->format('d M, Y H:i A')
         ];
     }
 }

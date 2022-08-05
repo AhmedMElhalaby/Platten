@@ -21,7 +21,7 @@ class Order extends Model
         'Canceled'=>5,
         'Rejected'=>6,
         'NotReceived'=>7,
-        'NotDelivered'=>7,
+        'NotDelivered'=>8,
     ];
     public function customer(): BelongsTo
     {
