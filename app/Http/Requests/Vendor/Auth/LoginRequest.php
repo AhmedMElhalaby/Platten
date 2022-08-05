@@ -33,6 +33,12 @@ class LoginRequest extends ApiRequest
         $tokenResult = $Vendor->createToken('Vendor Token');
         $token = $tokenResult->token;
         $token->save();
+
+        if ($this->filled('device_token') && $this->filled('device_type')){
+            $Vendor->device_token = $this->device_token;
+            $Vendor->device_type = $this->device_type;
+            $Vendor->save();
+        }
         return $this->success_response([],[
             'Vendor'=>new VendorResource($Vendor),
             'Login'=>[

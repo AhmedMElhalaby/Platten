@@ -361,3 +361,12 @@ Route::group([
     Route::post('update','OrderController@update');
     Route::post('review','OrderController@review');
 });
+
+Route::group([
+    'prefix' => 'notifications',
+], function () {
+    Route::get('/','NotificationController@index');
+    Route::get('show','NotificationController@show');
+    Route::post('store','NotificationController@send');
+    Route::post('update','NotificationController@read');
+});

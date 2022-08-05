@@ -33,6 +33,11 @@ class LoginRequest extends ApiRequest
         $tokenResult = $Customer->createToken('Customer Token');
         $token = $tokenResult->token;
         $token->save();
+        if ($this->filled('device_token') && $this->filled('device_type')){
+            $Customer->device_token = $this->device_token;
+            $Customer->device_type = $this->device_type;
+            $Customer->save();
+        }
         $Customer->refresh();
         return $this->success_response([],[
             'Customer'=>new CustomerResource($Customer),

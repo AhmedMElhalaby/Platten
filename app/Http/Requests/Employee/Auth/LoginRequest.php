@@ -33,6 +33,11 @@ class LoginRequest extends ApiRequest
         $tokenResult = $Employee->createToken('Employee Token');
         $token = $tokenResult->token;
         $token->save();
+        if ($this->filled('device_token') && $this->filled('device_type')){
+            $Employee->device_token = $this->device_token;
+            $Employee->device_type = $this->device_type;
+            $Employee->save();
+        }
         $Employee->refresh();
         return $this->success_response([],[
             'Employee'=>new EmployeeResource($Employee),

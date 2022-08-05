@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Notification\IndexRequest;
+use App\Http\Requests\Notification\ReadRequest;
+use App\Http\Requests\Notification\SendRequest;
+use App\Http\Requests\Notification\ShowRequest;
+
 class NotificationController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
+        return $request->run();
     }
-    public function show()
+    public function show(ShowRequest $request)
     {
+        return $request->run();
     }
-    public function store()
+    public function send(SendRequest $request)
     {
+        return $request->run();
     }
-    public function update()
+    public function read(ReadRequest $request)
     {
+        return $request->run();
     }
 }

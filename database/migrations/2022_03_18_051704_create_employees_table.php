@@ -20,6 +20,8 @@ class CreateEmployeesTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('device_token')->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
     }

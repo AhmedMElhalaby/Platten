@@ -30,6 +30,8 @@ class CreateVendorsTable extends Migration
             $table->string('postcode')->nullable();
             $table->string('avatar')->nullable();
             $table->string('cover')->nullable();
+            $table->string('device_token')->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
     }

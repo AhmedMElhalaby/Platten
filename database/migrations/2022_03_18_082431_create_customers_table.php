@@ -20,6 +20,8 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
+            $table->string('device_token')->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
     }

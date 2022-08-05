@@ -53,6 +53,31 @@ class InstallSeeder extends Seeder
                 'name'=>'رابط اللينكد ان',
                 'value'=>'',
                 'type'=>Setting::Types['Contact']
+            ],[
+                'key'=>'app_store',
+                'name'=>'رابط ابل ستور',
+                'value'=>'',
+                'type'=>Setting::Types['AppsServices']
+            ],[
+                'key'=>'google_play',
+                'name'=>'رابط جوجل بلاي',
+                'value'=>'',
+                'type'=>Setting::Types['AppsServices']
+            ],[
+                'key'=>'about',
+                'name'=>'من نحن',
+                'value'=>'',
+                'type'=>Setting::Types['Pages']
+            ],[
+                'key'=>'terms',
+                'name'=>'الشروط والأحكام',
+                'value'=>'',
+                'type'=>Setting::Types['Pages']
+            ],[
+                'key'=>'privacy',
+                'name'=>'سياسه الخصوصيه',
+                'value'=>'',
+                'type'=>Setting::Types['Pages']
             ],
         ];
         Setting::insert($Settings);
