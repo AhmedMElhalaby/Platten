@@ -63,7 +63,11 @@ Route::group([
         Route::post('update','CustomerController@update');
         Route::post('update/password','CustomerController@update_password');
         Route::post('logout','CustomerController@logout');
-
+    });
+    Route::group([
+        'middleware' => 'auth:employee'
+    ], function() {
+        Route::get('/','CustomerController@index');
     });
     Route::group([
         'prefix' => 'addresses',
@@ -117,10 +121,17 @@ Route::group([
     Route::group([
         'middleware' => 'auth:employee'
     ], function() {
+        Route::get('/','EmployeeController@index');
         Route::post('update','EmployeeController@update');
         Route::post('update/password','EmployeeController@update_password');
         Route::post('logout','EmployeeController@logout');
     });
+});
+Route::group([
+    'prefix' => 'dashboard',
+    'middleware' => 'auth:employee'
+], function () {
+    Route::get('statistics','DashboardController@statistics');
 });
 
 Route::group([
@@ -367,6 +378,6 @@ Route::group([
 ], function () {
     Route::get('/','NotificationController@index');
     Route::get('show','NotificationController@show');
-    Route::post('store','NotificationController@send');
-    Route::post('update','NotificationController@read');
+    Route::post('send','NotificationController@send');
+    Route::post('read','NotificationController@read');
 });

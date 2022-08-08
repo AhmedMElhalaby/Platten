@@ -7,7 +7,7 @@ use App\Models\SubCategory;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function statistics()
     {
         return ;
     }

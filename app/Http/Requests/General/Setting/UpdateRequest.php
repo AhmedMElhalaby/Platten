@@ -31,8 +31,8 @@ class UpdateRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Setting = $this->filled('setting_id')?new SettingResource(Setting::find($this->setting_id)):
-            new SettingResource(Setting::where('key',$this->key)->first());
+        $Setting = $this->filled('setting_id')?Setting::find($this->setting_id):
+            Setting::where('key',$this->key)->first();
         $Setting->value = $this->value;
         $Setting->save();
         return $this->success_response([__('messages.updated_successful')],[
