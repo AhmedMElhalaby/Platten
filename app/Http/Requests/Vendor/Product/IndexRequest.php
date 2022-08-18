@@ -37,16 +37,31 @@ class IndexRequest extends ApiRequest
             $Products = $Products->where('category_id',$this->category_id);
             $ProductTypes = $ProductTypes->where('category_id',$this->category_id);
         }
+        if ($this->filled('category_ids')) {
+            $Products = $Products->whereIn('category_id',$this->category_ids);
+            $ProductTypes = $ProductTypes->whereIn('category_id',$this->category_ids);
+        }
         if ($this->filled('sub_category_id')) {
             $Products = $Products->where('sub_category_id',$this->sub_category_id);
             $ProductTypes = $ProductTypes->where('sub_category_id',$this->sub_category_id);
+        }
+        if ($this->filled('sub_category_ids')) {
+            $Products = $Products->whereIn('sub_category_id',$this->sub_category_ids);
+            $ProductTypes = $ProductTypes->whereIn('sub_category_id',$this->sub_category_ids);
         }
         if ($this->filled('brand_id')) {
             $Products = $Products->where('brand_id',$this->brand_id);
             $ProductTypes = $ProductTypes->where('brand_id',$this->brand_id);
         }
+        if ($this->filled('brand_ids')) {
+            $Products = $Products->whereIn('brand_id',$this->brand_ids);
+            $ProductTypes = $ProductTypes->whereIn('brand_id',$this->brand_ids);
+        }
         if ($this->filled('type')) {
             $Products = $Products->where('type',$this->type);
+        }
+        if ($this->filled('types')) {
+            $Products = $Products->whereIn('type',$this->types);
         }
         if ($this->filled('price_from') && $this->filled('price_to')) {
             $Products = $Products->whereBetween('sell_price',[$this->price_from,$this->price_to]);
