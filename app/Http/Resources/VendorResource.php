@@ -2,12 +2,15 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Order;
+use App\Models\Review;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class VendorResource extends JsonResource
 {
     public function toArray($request): array
     {
+        $OrderIds = Order::where('vendor_id',$this->id)->pluck('id');
         return [
             'id'=>$this->id,
             'country_id'=>$this->country_id,
@@ -30,6 +33,7 @@ class VendorResource extends JsonResource
             'maroof_company_number'=>$this->maroof_company_number,
             'avatar'=>asset($this->avatar),
             'cover'=>asset($this->cover),
+            'rate'=>Review::whereIn('order_id',$OrderIds)->avg('rate')
         ];
     }
 }
