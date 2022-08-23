@@ -139,6 +139,19 @@ Route::group([
     'namespace' => 'General'
 ], function () {
     Route::group([
+        'prefix' => 'advertisements',
+    ], function () {
+        Route::get('/','AdvertisementController@index');
+        Route::get('show','AdvertisementController@show');
+        Route::group([
+            'middleware' => 'auth:employee'
+        ], function() {
+            Route::post('store','AdvertisementController@store');
+            Route::post('update','AdvertisementController@update');
+            Route::post('destroy','AdvertisementController@destroy');
+        });
+    });
+    Route::group([
         'prefix' => 'countries',
     ], function () {
         Route::get('/','CountryController@index');

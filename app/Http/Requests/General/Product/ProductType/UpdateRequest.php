@@ -21,6 +21,7 @@ class UpdateRequest extends ApiRequest
             'sub_category_id'=>'required|exists:sub_categories,id',
             'brand_id'=>'required|exists:brands,id',
             'name'=>'required|string|max:255',
+            'keywords'=>'nullable|string|max:255',
         ];
     }
     public function attributes(): array
@@ -47,6 +48,9 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->filled('name')) {
             $ProductType->name = $this->name;
+        }
+        if ($this->filled('keywords')) {
+            $ProductType->keywords = $this->keywords;
         }
         $ProductType->save();
         $ProductType->refresh();

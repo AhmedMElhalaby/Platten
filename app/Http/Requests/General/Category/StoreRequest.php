@@ -17,6 +17,7 @@ class StoreRequest extends ApiRequest
     {
         return [
             'name'=>'required|string|max:255',
+            'image'=>'required|mimes:png,jpg,jpeg',
         ];
     }
     public function attributes(): array
@@ -29,6 +30,8 @@ class StoreRequest extends ApiRequest
     {
         $Category = new Category();
         $Category->name = $this->name;
+        $path = $this->file('image')->store('public/categories');
+        $Category->image = $path;
         $Category->save();
         $Category->refresh();
         return $this->success_response([__('messages.created_successful')],[

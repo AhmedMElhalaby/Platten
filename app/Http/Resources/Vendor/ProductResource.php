@@ -38,7 +38,7 @@ class ProductResource extends JsonResource
             'ProductTypeModelColor'=>new ProductTypeModelColorResource($this->product_type_model_color),
             'product_type_model_size_id'=>$this->product_type_model_size_id,
             'ProductTypeModelSize'=>new ProductTypeModelSizeResource($this->product_type_model_size),
-            'ProductMedia'=>($this->product_type->media()->count() >0)?(new ProductTypeMediaResource($this->product_type->media)):[],
+            'ProductMedia'=>($this->product_type->media()->count() >0)?(ProductTypeMediaResource::collection($this->product_type->media)):[],
             'type'=>$this->type,
             'quantity'=>$this->quantity,
             'cost_price'=>$this->cost_price,

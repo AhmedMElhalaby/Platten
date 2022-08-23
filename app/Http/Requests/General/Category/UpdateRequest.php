@@ -18,6 +18,7 @@ class UpdateRequest extends ApiRequest
         return [
             'category_id'=>'required|exists:categories,id',
             'name'=>'nullable|string|max:255',
+            'image'=>'nullable|mimes:png,jpg,jpeg',
         ];
     }
     public function attributes(): array
@@ -32,6 +33,10 @@ class UpdateRequest extends ApiRequest
         $Category = (new Category())->find($this->category_id);
         if ($this->filled('name')) {
             $Category->name = $this->name;
+        }
+        if ($this->hasFile('image')) {
+            $path = $this->file('image')->store('public/categories');
+            $Category->image = $path;
         }
         $Category->save();
         $Category->refresh();

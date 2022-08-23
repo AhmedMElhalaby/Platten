@@ -4,7 +4,7 @@ namespace App\Http\Resources\General;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class AdvertisementResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -12,6 +12,9 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'image'=>asset($this->image),
+            'url'=>$this->url,
+            'type'=>$this->type,
+            'order'=>$this->order,
         ];
     }
 }

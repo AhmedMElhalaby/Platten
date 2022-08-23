@@ -21,6 +21,7 @@ class StoreRequest extends ApiRequest
             'sub_category_id'=>'required|exists:sub_categories,id',
             'brand_id'=>'required|exists:brands,id',
             'name'=>'required|string|max:255',
+            'keywords'=>'required|string|max:255',
             'media'=>'required',
             'media.*'=>'required|mimes:png,jpg,jpeg'
         ];
@@ -42,6 +43,7 @@ class StoreRequest extends ApiRequest
         $ProductType->sub_category_id = $this->sub_category_id;
         $ProductType->brand_id = $this->brand_id;
         $ProductType->name = $this->name;
+        $ProductType->keywords = $this->keywords;
         $ProductType->save();
         $ProductType->refresh();
         foreach ($this->file('media') as $media){

@@ -19,7 +19,9 @@ class ProductTypeResource extends JsonResource
             'SubCategory'=>new SubCategoryResource($this->sub_category),
             'brand_id'=>$this->brand_id,
             'Brand'=>new BrandResource($this->brand),
+            'keywords'=>$this->keywords,
             'name'=>$this->name,
+            'Media'=>ProductTypeMediaResource::collection($this->media)
         ];
     }
 }

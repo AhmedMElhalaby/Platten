@@ -11,7 +11,7 @@ class ProductType extends Model
 {
     use HasFactory;
     protected $table = 'products_types';
-    protected $fillable = ['category_id','sub_category_id','brand_id','name'];
+    protected $fillable = ['category_id','sub_category_id','brand_id','name','keywords'];
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
