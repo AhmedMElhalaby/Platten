@@ -28,7 +28,7 @@ class IndexRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Products = new Product();
+        $Products = (new Product())->withCount('orders_products');
         $ProductTypes = new ProductType();
         if ($this->filled('vendor_id')) {
             $Products = $Products->where('vendor_id',$this->vendor_id);
@@ -72,6 +72,15 @@ class IndexRequest extends ApiRequest
             $Products = $Products->where(function ($query) use ($ProductTypes,$q){
                 return $query->whereIn('product_type_id',$ProductTypes)->orWhere('note','Like','%'.$q.'%');
             });
+        }
+        if ($this->filled('top_sell') && $this->top_sell) {
+            $Products = $Products->orderBy('orders_products_count');
+        }
+        if ($this->filled('suggested') && $this->suggested) {
+            $Products = $Products->inRandomOrder();
+        }
+        if ($this->filled('offered') && $this->offered) {
+            $Products = $Products->where('discount','!=',0);
         }
         $ProductsCount = $Products->count();
         $Products = $Products->paginate($this->per_page??10);

@@ -296,6 +296,7 @@ Route::group([
                 Route::post('store','ProductTypeController@store');
                 Route::post('update','ProductTypeController@update');
                 Route::post('destroy','ProductTypeController@destroy');
+                Route::post('media/delete','ProductTypeController@delete_media');
             });
         });
         Route::group([

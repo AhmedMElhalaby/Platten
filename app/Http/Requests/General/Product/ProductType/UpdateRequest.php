@@ -4,6 +4,7 @@ namespace App\Http\Requests\General\Product\ProductType;
 
 use App\Http\Requests\ApiRequest;
 use App\Http\Resources\General\Product\ProductTypeResource;
+use App\Models\ProductMedia;
 use App\Models\ProductType;
 use Illuminate\Http\JsonResponse;
 
@@ -54,6 +55,16 @@ class UpdateRequest extends ApiRequest
         }
         $ProductType->save();
         $ProductType->refresh();
+        foreach ($this->file('media') as $media){
+            $mime_type = $media->getClientOriginalExtension();
+            $name = $media->getClientOriginalName();
+            $path = $media->store('public/files');
+            $ProductMedia = new ProductMedia();
+            $ProductMedia->path = $path;
+            $ProductMedia->product_type_id = $ProductType->id;
+            $ProductMedia->mime_type = ProductMedia::MimeTypes[$mime_type];
+            $ProductMedia->save();
+        }
         return $this->success_response([__('messages.updated_successful')],[
             'ProductType'=>new ProductTypeResource($ProductType)
         ]);

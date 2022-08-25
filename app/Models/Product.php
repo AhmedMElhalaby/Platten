@@ -44,6 +44,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductTypeModelSize::class);
     }
+    public function orders_products(): HasMany
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
     const Types = [
         'New'=>1,
         'Used'=>2

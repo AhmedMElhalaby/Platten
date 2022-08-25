@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\General\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\General\Product\ProductType\DeleteMediaRequest;
 use App\Http\Requests\General\Product\ProductType\DestroyRequest;
 use App\Http\Requests\General\Product\ProductType\IndexRequest;
 use App\Http\Requests\General\Product\ProductType\ShowRequest;
@@ -28,6 +29,10 @@ class ProductTypeController extends Controller
         return $request->run();
     }
     public function destroy(DestroyRequest $request)
+    {
+        return $request->run();
+    }
+    public function delete_media(DeleteMediaRequest $request)
     {
         return $request->run();
     }
