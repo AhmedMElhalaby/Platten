@@ -11,7 +11,7 @@ class ProductTypeMediaResource extends JsonResource
         return [
             'id'=>$this->id,
             'product_type_id'=>$this->product_type_id,
-            'path'=>$this->path,
+            'path'=>asset($this->path),
             'mime_type'=>$this->mime_type,
         ];
     }

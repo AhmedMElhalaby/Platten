@@ -31,7 +31,7 @@ class StoreRequest extends ApiRequest
         $Category = new Category();
         $Category->name = $this->name;
         $path = $this->file('image')->store('public/categories');
-        $Category->image = $path;
+        $Category->image = str_replace('public','storage',$path);
         $Category->save();
         $Category->refresh();
         return $this->success_response([__('messages.created_successful')],[

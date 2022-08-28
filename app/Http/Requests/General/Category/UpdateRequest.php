@@ -36,7 +36,7 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->hasFile('image')) {
             $path = $this->file('image')->store('public/categories');
-            $Category->image = $path;
+            $Category->image = str_replace('public','storage',$path);
         }
         $Category->save();
         $Category->refresh();

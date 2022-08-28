@@ -51,7 +51,7 @@ class StoreRequest extends ApiRequest
             $name = $media->getClientOriginalName();
             $path = $media->store('public/files');
             $ProductMedia = new ProductMedia();
-            $ProductMedia->path = $path;
+            $ProductMedia->path = str_replace('public','storage',$path);
             $ProductMedia->product_type_id = $ProductType->id;
             $ProductMedia->mime_type = ProductMedia::MimeTypes[$mime_type];
             $ProductMedia->save();
