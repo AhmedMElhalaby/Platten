@@ -125,6 +125,12 @@ Route::group([
         Route::post('update','EmployeeController@update');
         Route::post('update/password','EmployeeController@update_password');
         Route::post('logout','EmployeeController@logout');
+        Route::group(['prefix' => 'reports'],function (){
+            Route::get('customers','ReportController@customers');
+            Route::get('vendors','ReportController@vendors');
+            Route::get('products','ReportController@products');
+            Route::get('orders','ReportController@orders');
+        });
     });
 });
 Route::group([

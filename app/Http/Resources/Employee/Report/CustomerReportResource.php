@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Customer;
+namespace App\Http\Resources\Employee\Report;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CustomerResource extends JsonResource
+class CustomerReportResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -14,8 +13,7 @@ class CustomerResource extends JsonResource
             'name'=>$this->name,
             'email'=>$this->email,
             'mobile'=>$this->mobile,
-            'avatar'=>asset($this->avatar),
-            'created_at'=>Carbon::parse($this->created_at)->format('d M, Y H:i A')
+            'created_at'=>$this->created_at
         ];
     }
 }

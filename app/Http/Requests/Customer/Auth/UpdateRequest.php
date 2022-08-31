@@ -14,7 +14,7 @@ class UpdateRequest extends ApiRequest
 {
     public function authorize():bool
     {
-        return auth('customer')->check();
+        return auth('customer')->check() || auth('employee')->check();
     }
     public function rules():array
     {
@@ -23,6 +23,7 @@ class UpdateRequest extends ApiRequest
             'email'=>'nullable|string|email|unique:customers,email|max:255',
             'mobile'=>'nullable|string',
             'avatar'=>'nullable|mimes:png,jpg,jpeg',
+            'is_active'=>'nullable|boolean',
         ];
     }
     public function attributes(): array
@@ -46,6 +47,9 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->filled('mobile')){
             $Customer->mobile = $this->mobile;
+        }
+        if ($this->filled('is_active')){
+            $Customer->is_active = $this->is_active;
         }
         if ($this->hasFile('avatar')){
             $media = $this->file('avatar');

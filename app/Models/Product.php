@@ -52,4 +52,8 @@ class Product extends Model
         'New'=>1,
         'Used'=>2
     ];
+    const TypesStr = [
+        1 => 'New',
+        2 => 'Used'
+    ];
 }

@@ -14,7 +14,7 @@ class UpdateRequest extends ApiRequest
 {
     public function authorize():bool
     {
-        return auth('vendor')->check();
+        return auth('vendor')->check() || auth('employee')->check();
     }
     public function rules():array
     {
@@ -33,6 +33,7 @@ class UpdateRequest extends ApiRequest
             'maroof_company_number'=>'nullable|string|max:255',
             'avatar'=>'nullable|mimes:jpg,png,jpeg',
             'cover'=>'nullable|mimes:jpg,png,jpeg',
+            'is_active'=>'nullable|boolean'
         ];
     }
     public function attributes(): array
@@ -108,6 +109,9 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->filled('maroof_company_number')) {
             $Vendor->maroof_company_number = $this->maroof_company_number;
+        }
+        if ($this->filled('is_active')) {
+            $Vendor->is_active = $this->is_active;
         }
         if ($this->hasFile('avatar')) {
             $avatar = $this->file('avatar');

@@ -23,6 +23,17 @@ class Order extends Model
         'NotReceived'=>7,
         'NotDelivered'=>8,
     ];
+    const StatusesStr = [
+        0=>'Pending',
+        1=>'Accepted',
+        2=>'Paid',
+        3=>'InProgress',
+        4=>'Finished',
+        5=>'Canceled',
+        6=>'Rejected',
+        7=>'NotReceived',
+        8=>'NotDelivered',
+    ];
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
