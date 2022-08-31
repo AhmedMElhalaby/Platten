@@ -21,6 +21,7 @@ class CustomerExport implements WithMapping,WithHeadings,FromCollection
         $arr['name'] = $object->name;
         $arr['email'] = $object->email;
         $arr['mobile'] = $object->mobile;
+        $arr['is_active'] = $object->is_active;
         $arr['created_at'] = $object->created_at;
         return $arr;
     }
@@ -37,6 +38,7 @@ class CustomerExport implements WithMapping,WithHeadings,FromCollection
         array_push($heading,'Name');
         array_push($heading,'Email');
         array_push($heading,'Mobile');
+        array_push($heading,'Is Active');
         array_push($heading,'Create Date');
         return $heading;
     }

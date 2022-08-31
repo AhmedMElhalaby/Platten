@@ -35,6 +35,7 @@ class VendorExport implements WithMapping,WithHeadings,FromCollection
         $arr['address'] = $object->address;
         $arr['address_alt'] = $object->address_alt;
         $arr['maroof_tax_number'] = $object->maroof_tax_number;
+        $arr['is_active'] = $object->is_active;
         $arr['created_at'] = $object->created_at;
         return $arr;
     }
@@ -65,6 +66,7 @@ class VendorExport implements WithMapping,WithHeadings,FromCollection
         array_push($heading,'Address');
         array_push($heading,'Address Alt.');
         array_push($heading,'Maroof Tax Number');
+        array_push($heading,'Is Active');
         array_push($heading,'Create Date');
         return $heading;
     }

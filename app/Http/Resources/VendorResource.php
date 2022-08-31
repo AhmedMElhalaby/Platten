@@ -33,7 +33,8 @@ class VendorResource extends JsonResource
             'maroof_company_number'=>$this->maroof_company_number,
             'avatar'=>asset($this->avatar),
             'cover'=>asset($this->cover),
-            'rate'=>Review::whereIn('order_id',$OrderIds)->avg('rate')
+            'rate'=>Review::whereIn('order_id',$OrderIds)->avg('rate'),
+            'is_active'=>$this->is_active,
         ];
     }
 }

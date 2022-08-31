@@ -15,7 +15,8 @@ class CustomerResource extends JsonResource
             'email'=>$this->email,
             'mobile'=>$this->mobile,
             'avatar'=>asset($this->avatar),
-            'created_at'=>Carbon::parse($this->created_at)->format('d M, Y H:i A')
+            'created_at'=>Carbon::parse($this->created_at)->format('d M, Y H:i A'),
+            'is_active'=>$this->is_active
         ];
     }
 }

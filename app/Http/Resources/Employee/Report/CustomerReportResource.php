@@ -13,6 +13,7 @@ class CustomerReportResource extends JsonResource
             'name'=>$this->name,
             'email'=>$this->email,
             'mobile'=>$this->mobile,
+            'is_active'=>$this->is_active,
             'created_at'=>$this->created_at
         ];
     }

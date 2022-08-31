@@ -29,6 +29,7 @@ class VendorReportResource extends JsonResource
             'address_alt'=>$this->address_alt,
             'maroof_tax_number'=>$this->maroof_tax_number,
             'maroof_company_number'=>$this->maroof_company_number,
+            'is_active'=>$this->is_active,
             'created_at'=>Carbon::parse($this->created_at)->format('d M, Y H:i A')
         ];
     }
