@@ -38,7 +38,11 @@ class UpdateRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Customer = (new Customer())->find(auth('customer')->user()->id);
+        if ($this->filled('customer_id')){
+            $Customer = (new Customer())->find($this->customer_id);
+        }else{
+            $Customer = (new Customer())->find(auth('customer')->user()->id);
+        }
         if ($this->filled('name')) {
             $Customer->name = $this->name;
         }

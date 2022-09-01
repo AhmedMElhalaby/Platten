@@ -55,7 +55,12 @@ class UpdateRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $Vendor = (new Vendor())->find(auth('vendor')->user()->id);
+        if ($this->filled('vendor_id')){
+            $Vendor = (new Vendor())->find($this->vendor_id);
+        }else{
+            $Vendor = (new Vendor())->find(auth('vendor')->user()->id);
+
+        }
         if ($this->filled('name')) {
             $Vendor->name = $this->name;
         }
