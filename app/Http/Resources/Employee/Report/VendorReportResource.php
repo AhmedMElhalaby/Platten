@@ -11,8 +11,8 @@ class VendorReportResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'country_name'=>$this->country->name,
-            'city_name'=>$this->city->name,
+            'country_name'=>$this->country?$this->country->name:'-',
+            'city_name'=>$this->city?$this->city->name:'-',
             'email'=>$this->email,
             'name'=>$this->name,
             'mobile'=>$this->mobile,

@@ -43,7 +43,7 @@ class UpdateRequest extends ApiRequest
         }
         if ($this->hasFile('image')) {
             $path = $this->file('image')->store('public/advertisements');
-            $Advertisement->image = $path;
+            $Advertisement->image = str_replace('public','storage',$path);
         }
         if ($this->filled('url')) {
             $Advertisement->url = $this->url;

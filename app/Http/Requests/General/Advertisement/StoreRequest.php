@@ -35,7 +35,7 @@ class StoreRequest extends ApiRequest
         $Advertisement = new Advertisement();
         $Advertisement->name = $this->name;
         $path = $this->file('image')->store('public/advertisements');
-        $Advertisement->image = $path;
+        $Advertisement->image = str_replace('public','storage',$path);
         $Advertisement->url = $this->url;
         $Advertisement->type = $this->type;
         if ($this->filled('order')) {
