@@ -78,6 +78,11 @@ class InstallSeeder extends Seeder
                 'name'=>'سياسه الخصوصيه',
                 'value'=>'',
                 'type'=>Setting::Types['Pages']
+            ],[
+                'key'=>'delivery_terms',
+                'name'=>'سياسه وأسعار الشحن',
+                'value'=>'',
+                'type'=>Setting::Types['Pages']
             ],
         ];
         Setting::insert($Settings);
