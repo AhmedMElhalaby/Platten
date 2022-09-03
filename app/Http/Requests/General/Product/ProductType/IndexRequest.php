@@ -26,7 +26,7 @@ class IndexRequest extends ApiRequest
     public function run(): JsonResponse
     {
         $ProductTypes = (new ProductType())->when($this->filled('q'),function($q){
-            return $q->where('question','Like','%'.$this->q.'%');
+            return $q->where('name','Like','%'.$this->q.'%');
         })->paginate($this->per_page??10);
         return $this->success_response([],[
             'ProductTypes'=>ProductTypeResource::collection($ProductTypes->items())

@@ -30,7 +30,7 @@ class IndexRequest extends ApiRequest
         $ProductTypeModelSizes = (new ProductTypeModelSize())->when($this->filled('product_type_model_id'),function ($q){
             return $q->where('product_type_model_id',$this->product_type_model_id);
         })->when($this->filled('q'),function($q){
-            return $q->where('question','Like','%'.$this->q.'%');
+            return $q->where('name','Like','%'.$this->q.'%');
         })->paginate($this->per_page??10);
         return $this->success_response([],[
             'ProductTypeModelSizes'=>ProductTypeModelSizeResource::collection($ProductTypeModelSizes->items())
