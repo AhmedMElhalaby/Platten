@@ -67,7 +67,7 @@ class IndexRequest extends ApiRequest
             $Products = $Products->whereBetween('sell_price',[$this->price_from,$this->price_to]);
         }
         if ($this->filled('q')) {
-            $ProductTypes = $ProductTypes->where('name','Like','%'.$this->q.'%')->plcuk('id');
+            $ProductTypes = $ProductTypes->where('name','Like','%'.$this->q.'%')->pluck('id');
             $q = $this->q;
             $Products = $Products->where(function ($query) use ($ProductTypes,$q){
                 return $query->whereIn('product_type_id',$ProductTypes)->orWhere('note','Like','%'.$q.'%');
