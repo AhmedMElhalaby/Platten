@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'status'=>'الحالة',
-    'date_from'=>'التاريخ من ',
-    'date_to'=>'التاريخ الى ',
-    'q'=>'نص البحث',
-    'per_page'=>'عدد العناصر في الصفحة الواحدة',
+    'status'=>'Status',
+    'date_from'=>'From Date ',
+    'date_to'=>'To Date ',
+    'q'=>'Search text',
+    'per_page'=>'Per Page',
     'Country' =>[
-        'country_id'=>'الدولة',
-        'name'=>'اسم الدولة',
-        'code'=>'كود الدولة',
-        'flag'=>'علم الدولة',
+        'country_id'=>'Country_id',
+        'name'=>'Country Name',
+        'code'=>'Country Code',
+        'flag'=>'Country Flag',
     ],
     'City' =>[
-        'city_id'=>'المدينة',
-        'country_id'=>'الدولة',
-        'name'=>'اسم الدولة',
+        'city_id'=>'City_id',
+        'country_id'=>'Country',
+        'name'=>'City Name',
     ],
 ];
