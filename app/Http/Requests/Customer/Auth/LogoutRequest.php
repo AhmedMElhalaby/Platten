@@ -15,8 +15,8 @@ class LogoutRequest extends ApiRequest
     }
     public function run(): JsonResponse
     {
-        $this->user('employee')->token()->revoke();
-        $this->user('employee')->token()->delete();
+        $this->user('customer')->token()->revoke();
+        $this->user('customer')->token()->delete();
         return $this->success_response([__('auth.logout')]);
     }
 }
